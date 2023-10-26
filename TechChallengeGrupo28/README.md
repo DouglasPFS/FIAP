@@ -39,7 +39,9 @@ Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando 
           <br>Douglas R. Moreira</br>
         </sub>
       </a>
-	  <a href="https://github.com/lararicardo">
+    </td>
+	<td align="center">
+      <a href="https://github.com/lararicardo">
         <img style="height:auto;" src="https://avatars.githubusercontent.com/u/5578401?v=4" width="200" height="200" class="avatar avatar-user width-full border color-bg-default" alt="@lararicardo's">
 		<sub>
           <br>Ricardo R. Lara</br>
