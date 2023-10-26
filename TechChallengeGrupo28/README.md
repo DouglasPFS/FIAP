@@ -35,9 +35,6 @@ Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando 
     <td align="center">
       <a href="https://github.com/DouglasPFS">
         <img class="avatar rounded-2 avatar-user" src="https://avatars.githubusercontent.com/u/18017521?s=400&amp;u=6fcd8bd5ed6088d6f752ee31f32ec3a92875c87c&amp;v=4" width="200" height="200" alt="@DouglasPFS">
-        <sub>
-          <br>Douglas R. Moreira</br>
-        </sub>
       </a>
     </td>
   </tr>
