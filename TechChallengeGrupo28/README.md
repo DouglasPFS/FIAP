@@ -35,9 +35,24 @@ Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando 
     <td align="center">
       <a href="https://github.com/DouglasPFS">
         <img class="avatar rounded-2 avatar-user" src="https://avatars.githubusercontent.com/u/18017521?s=400&amp;u=6fcd8bd5ed6088d6f752ee31f32ec3a92875c87c&amp;v=4" width="200" height="200" alt="@DouglasPFS">
+        <sub>
+          <br>Douglas R. Moreira</br>
+        </sub>
       </a>
     </td>
   </tr>
 </table>
 
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/lararicardo">
+        <img style="height:auto;" alt="View lararicardo's full-sized avatar" src="https://avatars.githubusercontent.com/u/5578401?v=4" width="260" height="260" class="avatar avatar-user width-full border color-bg-default">
+		<sub>
+          <br>Ricardo R. Lara</br>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 ## :dart: Status do projeto# TechChallengeGrupo28
