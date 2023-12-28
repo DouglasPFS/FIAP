@@ -23,30 +23,21 @@ A loja precisa implementar um sistema de logística eficiente que possa gerencia
 * <b>Gerenciamento de dados</b>: Funcionalidades responsáveis pelo manuseio dos dados de clientes, pacotes e entrega. Sendo os dados armazenados em banco de dados H2.
 
 ## :wrench: Tecnologias utilizadas
-* Java, H2, Spring Boot, Maven.
+* Java, H2, Spring Boot, Maven e Angular.
 
 ## :rocket: Rodando o projeto
-Primeiramente realize o clone do projeto em seu computador:
-
+Para rodar o repositório é necessário clonar o mesmo, dar o seguinte comando para iniciar o projeto:
 ```
-git clone https://github.com/lararicardo/TechChallengeGrupo28.git
+<linha de comando>
 ```
-
-cd TechChallengeGrupo28 </br>
-mvn spring-boot:run </br> </br>
-
-<b>Colletion para teste da api via Postman. Ela pode ser encontrada na pasta raiz do projeto. </b></br>
-Tech Challenge.postman_collection.json </br></br>
-
-<b> URL Padrão app Backend </b></br>
-http://localhost:8080/api/clientes </br></br>
-
-
-
+cd /opt/
+git clone {URL_DO_REPOSITÓRIO}
+cd {NOME_PROJETO}
+./mvnw spring-boot:run
+curl -Ivvv https://{URL}:8080/X
 
 ## :soon: Implementação futura
-
-Cadastro de clientes (Camada de apresentação).
+* O que será implementado na próxima sprint?
 
 ## :handshake: Colaboradores
 <table>
@@ -67,22 +58,6 @@ Cadastro de clientes (Camada de apresentação).
         </sub>
       </a>
     </td>
-	<td align="center">
-      <a href="https://github.com/devopsjeffersantos">
-        <img style="height:auto;" src="https://avatars.githubusercontent.com/u/117692262?v=4" width="200" height="200" class="avatar avatar-user width-full border color-bg-default" alt="@devopsjeffersantos's">
-		<sub>
-          <br>Jefferson R. Santos</br>
-        </sub>
-      </a>
-    </td>
-	<td align="center">
-      <a href="[https://github.com/devopsjeffersantos](https://github.com/Lukas-Barcellos)">
-        <img style="height:auto;" src="https://avatars.githubusercontent.com/u/117692262?v=4" width="200" height="200" class="avatar avatar-user width-full border color-bg-default" alt="@Lukas-Barcellos's">
-		<sub>
-          <br>Lukas Barcellos</br>
-        </sub>
-      </a>
-    </td>	  
   </tr>
 </table>
 

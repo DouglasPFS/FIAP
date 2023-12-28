@@ -26,6 +26,18 @@ public class ClienteService {
     }
 
     public Cliente createCliente(Cliente cliente) {
-        return clienteRepository.save(cliente);
+        if (clienteRepository.findById(cliente.getCnpj()).isPresent()){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Cliente já existe na base de dados");
+        }else{
+            return clienteRepository.save(cliente);
+        }
+    }
+
+    public Cliente updateCliente(Cliente cliente){
+        if (clienteRepository.findById(cliente.getCnpj()).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
+        }else{
+            return clienteRepository.save(cliente);
+        }
     }
 }

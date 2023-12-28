@@ -1,6 +1,9 @@
 package br.com.fiap.techchallenge.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
+
+import java.util.stream.Stream;
 
 @Getter
 public enum Estado {
@@ -34,11 +37,20 @@ public enum Estado {
     DISTRITO_FEDERAL("Distrito Federal", "DF");
 
     private final String nome;
+
     private final String sigla;
 
     Estado(final String nome, final String sigla) {
         this.nome = nome;
         this.sigla = sigla;
+    }
+
+    @JsonCreator
+    public static Estado forValue(String value) {
+        return Stream.of(Estado.values())
+                .filter(enumValue -> enumValue.getSigla().equals(value.toUpperCase()))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
 }
