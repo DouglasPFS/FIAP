@@ -1,12 +1,18 @@
 package com.techchallenge.restaurant.api.findfood.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_reserva")
+@Getter
+@Setter
 public class Reserva {
 
     @Id
@@ -14,8 +20,6 @@ public class Reserva {
     private Long id;
 
     private LocalDateTime dataHora;
-
-    private Long horasSolicitadas;
 
     private Long qtdPessoa;
 
@@ -25,55 +29,14 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(Long id, LocalDateTime dataHora, Long horasSolicitadas, Long qtdPessoa, Restaurante restaurante) {
+    public Reserva(Long id, LocalDateTime dataHora, Long qtdPessoa, Restaurante restaurante) {
         this.id = id;
         this.dataHora = dataHora;
-        this.horasSolicitadas = horasSolicitadas;
         this.qtdPessoa = qtdPessoa;
         this.restaurante = restaurante;
     }
 
-    public Long getHorasSolicitadas() {
-        return horasSolicitadas;
-    }
-
-    public void setHorasSolicitadas(Long horasSolicitadas) {
-        this.horasSolicitadas = horasSolicitadas;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public Long getQtdPessoa() {
-        return qtdPessoa;
-    }
-
-    public void setQtdPessoa(Long qtdPessoa) {
-        this.qtdPessoa = qtdPessoa;
-    }
-
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
-    }
-
-    @Override
+      @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -92,9 +55,9 @@ public class Reserva {
         return "Reserva{" +
                 "id=" + id +
                 ", dataHora=" + dataHora +
-                ", horasSolicitadas=" + horasSolicitadas +
                 ", qtdPessoa=" + qtdPessoa +
                 ", restaurante=" + restaurante +
                 '}';
     }
+
 }

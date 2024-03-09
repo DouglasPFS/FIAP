@@ -1,11 +1,16 @@
 package com.techchallenge.restaurant.api.findfood.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "tb_restaurante")
+@Getter
+@Setter
 public class Restaurante {
 
     @Id
@@ -21,6 +26,7 @@ public class Restaurante {
 
     private int capacidade;
 
+
     public Restaurante(Long id, String nomeRestaurante, String localizacao, String tipoCozinha, String horarioFuncionamento, int capacidade) {
         this.id = id;
         this.nomeRestaurante = nomeRestaurante;
@@ -30,54 +36,7 @@ public class Restaurante {
         this.capacidade = capacidade;
     }
 
-    public Restaurante(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomeRestaurante() {
-        return nomeRestaurante;
-    }
-
-    public void setNomeRestaurante(String nomeRestaurante) {
-        this.nomeRestaurante = nomeRestaurante;
-    }
-
-    public String getLocalizacao() {
-        return localizacao;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
-    }
-
-    public String getTipoCozinha() {
-        return tipoCozinha;
-    }
-
-    public void setTipoCozinha(String tipoCozinha) {
-        this.tipoCozinha = tipoCozinha;
-    }
-
-    public String getHorarioFuncionamento() {
-        return horarioFuncionamento;
-    }
-
-    public void setHorarioFuncionamento(String horarioFuncionamento) {
-        this.horarioFuncionamento = horarioFuncionamento;
-    }
-
-    public int getCapacidade() {
-        return capacidade;
-    }
-
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
+    public Restaurante() {
     }
 
     @Override

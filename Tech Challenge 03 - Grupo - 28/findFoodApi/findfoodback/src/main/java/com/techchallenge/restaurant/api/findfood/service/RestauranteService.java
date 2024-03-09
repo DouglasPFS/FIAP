@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,10 +40,10 @@ public class RestauranteService {
         try {
             Restaurante buscaRestaurante = repo.getReferenceById(id);
             buscaRestaurante.setNomeRestaurante(restauranteDTO.nomeRestaurante());
-            buscaRestaurante.setTipoCozinha(restauranteDTO.tipoCozinha());
+            buscaRestaurante.setCapacidade(restauranteDTO.capacidade());
             buscaRestaurante.setLocalizacao(restauranteDTO.localizacao());
             buscaRestaurante.setHorarioFuncionamento(restauranteDTO.horarioFuncionamento());
-            buscaRestaurante.setCapacidade(restauranteDTO.capacidade());
+            buscaRestaurante.setTipoCozinha(restauranteDTO.tipoCozinha());
             buscaRestaurante = repo.save(buscaRestaurante);
             return toRestauranteDTO(buscaRestaurante);
         } catch (EntityNotFoundException e) {
@@ -60,10 +61,13 @@ public class RestauranteService {
         return new RestauranteDTO(
                 restaurante.getId(),
                 restaurante.getNomeRestaurante(),
-                restaurante.getTipoCozinha(),
                 restaurante.getLocalizacao(),
+                restaurante.getTipoCozinha(),
                 restaurante.getHorarioFuncionamento(),
                 restaurante.getCapacidade()
+
+
+
 
         );
     }
@@ -73,8 +77,8 @@ public class RestauranteService {
         return new Restaurante(
                 restauranteDTO.id(),
                 restauranteDTO.nomeRestaurante(),
-                restauranteDTO.tipoCozinha(),
                 restauranteDTO.localizacao(),
+                restauranteDTO.tipoCozinha(),
                 restauranteDTO.horarioFuncionamento(),
                 restauranteDTO.capacidade()
 
@@ -82,6 +86,8 @@ public class RestauranteService {
 
         );
     }
+
+
 
 
 }

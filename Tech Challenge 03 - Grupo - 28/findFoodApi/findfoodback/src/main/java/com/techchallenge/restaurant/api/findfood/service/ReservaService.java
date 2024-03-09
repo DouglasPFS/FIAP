@@ -40,7 +40,6 @@ public class ReservaService {
         try {
             Reserva buscaReserva = repo.getReferenceById(id);
             buscaReserva.setDataHora(reservaDTO.dataHora());
-            buscaReserva.setHorasSolicitadas(reservaDTO.horaSolicitadas());
             buscaReserva.setQtdPessoa(reservaDTO.qtdPessoa());
             buscaReserva.setRestaurante(reservaDTO.restaurante());
             buscaReserva = repo.save(buscaReserva);
@@ -60,7 +59,6 @@ public class ReservaService {
         return new ReservaDTO(
                 reserva.getId(),
                 reserva.getDataHora(),
-                reserva.getHorasSolicitadas(),
                 reserva.getQtdPessoa(),
                 reserva.getRestaurante()
 
@@ -71,7 +69,6 @@ public class ReservaService {
         return new Reserva(
                 reservaDTO.id(),
                 reservaDTO.dataHora(),
-                reservaDTO.horaSolicitadas(),
                 reservaDTO.qtdPessoa(),
                 reservaDTO.restaurante()
 

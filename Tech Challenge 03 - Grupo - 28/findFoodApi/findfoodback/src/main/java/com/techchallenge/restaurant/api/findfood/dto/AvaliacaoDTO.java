@@ -1,7 +1,6 @@
 package com.techchallenge.restaurant.api.findfood.dto;
 
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
-import jakarta.persistence.ManyToOne;
+import com.techchallenge.restaurant.api.findfood.entities.Reserva;
 
 public record AvaliacaoDTO(Long id,
 
@@ -9,7 +8,7 @@ public record AvaliacaoDTO(Long id,
 
                            String comentario,
 
-                           Restaurante restaurante
+                           Reserva reserva
 
 ) {
 

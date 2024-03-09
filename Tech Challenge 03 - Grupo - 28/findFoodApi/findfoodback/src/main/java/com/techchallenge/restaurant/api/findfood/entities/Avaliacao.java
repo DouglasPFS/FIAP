@@ -1,12 +1,16 @@
 package com.techchallenge.restaurant.api.findfood.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_avaliacao")
+@Getter
+@Setter
 public class Avaliacao {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,46 +19,15 @@ public class Avaliacao {
     private int pontuacao;
     private String comentario;
 
-    @ManyToOne
-    private Restaurante restaurante;
+    @OneToOne
+    private Reserva reserva;
 
 
-    public Avaliacao(int pontuacao, String comentario, Restaurante restaurante) {
-        this.pontuacao = pontuacao;
-        this.comentario = comentario;
-        this.restaurante = restaurante;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Avaliacao(Long id, int pontuacao, String comentario, Reserva reserva) {
         this.id = id;
-    }
-
-    public int getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(int pontuacao) {
         this.pontuacao = pontuacao;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
         this.comentario = comentario;
-    }
-
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+        this.reserva = reserva;
     }
 
     @Override
@@ -68,6 +41,16 @@ public class Avaliacao {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" +
+                "id=" + id +
+                ", pontuacao=" + pontuacao +
+                ", comentario='" + comentario + '\'' +
+                ", reserva=" + reserva +
+                '}';
     }
 }
 

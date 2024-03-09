@@ -10,6 +10,8 @@ public record RestauranteDTO(Long id,
                              String horarioFuncionamento,
                              int capacidade
 
+
+
 ) {
 
 }
