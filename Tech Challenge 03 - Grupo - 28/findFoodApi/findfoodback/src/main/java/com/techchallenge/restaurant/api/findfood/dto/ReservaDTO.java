@@ -1,18 +1,19 @@
 package com.techchallenge.restaurant.api.findfood.dto;
 
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+@Getter
+@Setter
+public class ReservaDTO {
 
-public record ReservaDTO(Long id,
+    private Long id;
 
-                         LocalDateTime dataHora,
+    private LocalDateTime dataHoraInicio;
 
-                         Long horaSolicitadas,
+    private LocalDateTime dataHoraFim;
 
-                         Long qtdPessoa,
-
-
-                         Restaurante restaurante) {
+    private Integer qtdPessoas;
 
 }

@@ -5,7 +5,9 @@ import com.techchallenge.restaurant.api.findfood.dto.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
 import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +17,21 @@ import java.util.stream.Collectors;
 public class RestauranteService {
 
     @Autowired
-    private RestauranteRepository repo;
+    private RestauranteRepository restauranteRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public RestauranteDTO save(RestauranteDTO restauranteDTO) {
+        Restaurante restaurante = restauranteRepository.save(modelMapper.map(restauranteDTO, Restaurante.class));
+        return modelMapper.map(restaurante, RestauranteDTO.class);
+    }
+
+    public List<Restaurante> findRestaurantePorNomeOuLocalizacaoOuTipoDeCozinha(String nome, String localizacao, String tipoDeCozinha) {
+        return restauranteRepository.findByNomeIgnoreCaseOrLocalizacaoIgnoreCaseOrTipoCozinhaIgnoreCase(nome, localizacao, tipoDeCozinha);
+    }
+
+    // TODO MÉTODOS FINALIZADOS ESTÃO ACIMA
 
     public Collection<RestauranteDTO> findAll() {
         var restaurantes = repo.findAll();
@@ -26,12 +42,6 @@ public class RestauranteService {
 
     public RestauranteDTO findById(Long id) {
         var restaurante = repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Restaurante não encontrado"));
-        return toRestauranteDTO(restaurante);
-    }
-
-    public RestauranteDTO save(RestauranteDTO restauranteDTO) {
-        Restaurante restaurante = toRestaurante(restauranteDTO);
-        restaurante = repo.save(restaurante);
         return toRestauranteDTO(restaurante);
     }
 
@@ -55,39 +65,5 @@ public class RestauranteService {
     public void delete(Long id) {
         repo.deleteById(id);
     }
-
-
-    private RestauranteDTO toRestauranteDTO(Restaurante restaurante) {
-        return new RestauranteDTO(
-                restaurante.getId(),
-                restaurante.getNomeRestaurante(),
-                restaurante.getLocalizacao(),
-                restaurante.getTipoCozinha(),
-                restaurante.getHorarioFuncionamento(),
-                restaurante.getCapacidade()
-
-
-
-
-        );
-    }
-
-
-    private Restaurante toRestaurante(RestauranteDTO restauranteDTO){
-        return new Restaurante(
-                restauranteDTO.id(),
-                restauranteDTO.nomeRestaurante(),
-                restauranteDTO.localizacao(),
-                restauranteDTO.tipoCozinha(),
-                restauranteDTO.horarioFuncionamento(),
-                restauranteDTO.capacidade()
-
-
-
-        );
-    }
-
-
-
 
 }

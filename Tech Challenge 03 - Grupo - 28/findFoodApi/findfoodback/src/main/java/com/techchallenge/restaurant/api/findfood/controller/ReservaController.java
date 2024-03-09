@@ -2,7 +2,9 @@ package com.techchallenge.restaurant.api.findfood.controller;
 
 
 import com.techchallenge.restaurant.api.findfood.dto.ReservaDTO;
+import com.techchallenge.restaurant.api.findfood.dto.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.entities.Reserva;
+import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -13,11 +15,18 @@ import java.util.Collection;
 
 
 @RestController
-@RequestMapping("/api/reservas")
+@RequestMapping("/api/restaurantes")
 public class ReservaController {
 
     @Autowired
     private ReservaService service;
+
+    @PostMapping("/{restauranteId}/reservarMesa")
+    public ResponseEntity<String> reservarMesa(@PathVariable Long restauranteId, @RequestBody ReservaDTO reservaDTO) {
+        tableBookingService.bookTable(restaurantId, bookingRequest);
+    }
+
+    // TODO MÉTODOS FINALIZADOS ESTÃO ACIMA
 
     @GetMapping
     public ResponseEntity<Collection<ReservaDTO>> findAll() {
@@ -56,17 +65,17 @@ public class ReservaController {
 
         int limitePorMesa = 4;
 
-        if(reserva.getQtdPessoa() < limitePorMesa) {
-            Mesa mesa = mesaRepository.findById(reserva.getMesaId()).orElse(null);
-            if (mesa != null && mesa.isDisponivelParaReserva()) {
-                mesa.setDisponivelParaReserva(false);
-                mesaRepository.save(mesa);
-                return ResponseEntity.ok("Reserva realizada com sucesso!");
-            } else {
-                return ResponseEntity.badRequest().body("Mesa não disponível para reserva.");
-            }
-
-        }
+//        if(reserva.getQtdPessoa() < limitePorMesa) {
+//            Mesa mesa = mesaRepository.findById(reserva.getMesaId()).orElse(null);
+//            if (mesa != null && mesa.isDisponivelParaReserva()) {
+//                mesa.setDisponivelParaReserva(false);
+//                mesaRepository.save(mesa);
+//                return ResponseEntity.ok("Reserva realizada com sucesso!");
+//            } else {
+//                return ResponseEntity.badRequest().body("Mesa não disponível para reserva.");
+//            }
+//
+//        }
         return ResponseEntity.ok("Reserva realizada com sucesso!");
     }
 

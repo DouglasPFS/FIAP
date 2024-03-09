@@ -8,5 +8,7 @@ import java.util.List;
 @Repository
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
 
-    List<Restaurante> findByNomeRestauranteOrTipoCozinhaOrLocalizacao(String nome, String tipoCozinha, String localizacao);
+    List<Restaurante> findByNomeIgnoreCaseOrLocalizacaoIgnoreCaseOrTipoCozinhaIgnoreCase(String nome,
+                                                                                      String tipoCozinha,
+                                                                                      String localizacao);
 }
