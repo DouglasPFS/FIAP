@@ -1,9 +1,7 @@
 package com.techchallenge.restaurant.api.findfood.controller;
 
-
 import com.techchallenge.restaurant.api.findfood.dto.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
-import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.service.RestauranteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -28,14 +26,12 @@ public class RestauranteController {
     }
 
     @GetMapping("/pesquisa")
-    public ResponseEntity<List<Restaurante>> findRestaurantes(@RequestParam(name = "nome", required = false) String nome,
-                                                              @RequestParam(name = "tipoCozinha", required = false) String tipoCozinha,
-                                                              @RequestParam(name = "localizacao", required = false) String localizacao) {
-        var restaurante = service.findRestaurantePorNomeOuLocalizacaoOuTipoDeCozinha(nome, tipoCozinha, localizacao);
+    public ResponseEntity<List<Restaurante>> findRestaurantes(@RequestParam(name = "nome", required = false, defaultValue = "") String nome,
+                                                              @RequestParam(name = "localizacao", required = false, defaultValue = "") String localizacao,
+                                                              @RequestParam(name = "tipoCozinha", required = false, defaultValue = "") String tipoCozinha) {
+        var restaurante = service.findRestaurantePorNomeOuLocalizacaoOuTipoDeCozinha(nome, localizacao, tipoCozinha);
         return ResponseEntity.ok(restaurante);
     }
-
-    // TODO MÉTODOS FINALIZADOS ESTÃO ACIMA
 
     @GetMapping
     public ResponseEntity<Collection<RestauranteDTO>> findAll() {
@@ -43,27 +39,15 @@ public class RestauranteController {
         return ResponseEntity.ok(restaurantes);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RestauranteDTO> findById(@PathVariable Long id) {
-        var restaurante = service.findById(id);
-        return ResponseEntity.ok(restaurante);
-    }
-
-
-
-
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<RestauranteDTO> update(@PathVariable Long id,
-                                                 @RequestBody RestauranteDTO restauranteDTO) {
-        restauranteDTO = service.update(id, restauranteDTO);
+    @PutMapping("/{restauranteId}")
+    public ResponseEntity<RestauranteDTO> update(@PathVariable Long restauranteId, @RequestBody RestauranteDTO restauranteDTO) {
+        restauranteDTO = service.update(restauranteId, restauranteDTO);
         return ResponseEntity.ok(restauranteDTO);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
+    @DeleteMapping("/{restauranteId}")
+    public ResponseEntity<Void> delete(@PathVariable Long restauranteId) {
+        service.delete(restauranteId);
         return ResponseEntity.noContent().build();
     }
 }

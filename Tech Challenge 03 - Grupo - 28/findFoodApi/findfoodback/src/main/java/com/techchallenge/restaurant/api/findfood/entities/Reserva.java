@@ -25,4 +25,10 @@ public class Reserva {
     @ManyToOne
     private Restaurante restaurante;
 
+    private String nomeCliente;
+
+    private String emailCliente;
+
+    private String telefoneCliente;
+
 }

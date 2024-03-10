@@ -1,15 +1,23 @@
 package com.techchallenge.restaurant.api.findfood.dto;
 
-import com.techchallenge.restaurant.api.findfood.entities.Reserva;
+import lombok.Getter;
+import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
-public record AvaliacaoDTO(Long id,
+@Getter
+@Setter
+public class AvaliacaoDTO {
 
-                           int pontuacao,
+    @NotNull(value = "A pontuação não foi preenchida")
+    private Integer pontuacao;
 
-                           String comentario,
+    @NotNull(value = "O comentário não foi preenchido")
+    private String comentario;
 
-                           Reserva reserva
+    @NotNull(value = "O Nome do Cliente não foi preenchido")
+    private String nomeCliente;
 
-) {
+    private String emailCliente;
 
+    private String telefoneCliente;
 }
