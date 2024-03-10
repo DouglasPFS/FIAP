@@ -1,18 +1,28 @@
 package com.techchallenge.restaurant.api.findfood.dto;
 
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+@Getter
+@Setter
+public class ReservaDTO {
 
-public record ReservaDTO(Long id,
+    private Long id;
 
-                         LocalDateTime dataHora,
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dataHoraInicio;
 
-                         Long horaSolicitadas,
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dataHoraFim;
 
-                         Long qtdPessoa,
+    private Integer qtdPessoas;
 
+    private String nomeCliente;
 
-                         Restaurante restaurante) {
+    private String emailCliente;
+
+    private String telefoneCliente;
 
 }

@@ -1,79 +1,76 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.controller.exception.ControllerNotFoundException;
 import com.techchallenge.restaurant.api.findfood.dto.ReservaDTO;
 import com.techchallenge.restaurant.api.findfood.entities.Reserva;
+import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
 import com.techchallenge.restaurant.api.findfood.repository.ReservaRepository;
+import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ReservaService {
 
     @Autowired
-    private ReservaRepository repo;
+    private ReservaRepository reservaRepository;
+
+    @Autowired
+    private RestauranteRepository restauranteRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public ReservaDTO reservarMesa(Long restauranteId, ReservaDTO reservaDTO){
+        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
+        if (optionalRestaurante.isEmpty()) {
+            throw new EntityNotFoundException("Restaurante não existe");
+        }
+
+        Reserva reserva = modelMapper.map(reservaDTO, Reserva.class);
+        reserva.setRestaurante(optionalRestaurante.get());
+
+        if(haMesasDisponiveis(reserva)){
+            return modelMapper.map(reservaRepository.save(reserva), ReservaDTO.class);
+        } else {
+            throw new IllegalArgumentException("Não há lugares disponíveis nesse horário para o Restaurante: " + optionalRestaurante.get().getNome());
+        }
+    }
+
+    private boolean haMesasDisponiveis(Reserva reserva) {
+        final int qtdePessoasPorMesa = 4;
+        int qtdeTotalDeMesas = reserva.getRestaurante().getQuantidadeTotalDeMesas();
+
+        List<Reserva> listaDeReservas = reservaRepository.findReservasNoIntervaloDaNovaReservaSolicitada(reserva.getRestaurante(), reserva.getDataHoraInicio(), reserva.getDataHoraFim());
+        int totalDeMesasReservadas = listaDeReservas.stream()
+                .mapToInt(value -> (int) Math.ceil((double)  value.getQtdPessoas() / qtdePessoasPorMesa))
+                .sum();
+
+        int qtdeTotalMesasLivres = qtdeTotalDeMesas - totalDeMesasReservadas;
+        int mesasNecesariasParaReserva = (int) Math.ceil((double)  reserva.getQtdPessoas() / qtdePessoasPorMesa);
+
+        return qtdeTotalMesasLivres >= mesasNecesariasParaReserva;
+    }
 
     public Collection<ReservaDTO> findAll() {
-        var reservas = repo.findAll();
-        return reservas.stream()
-                .map(this::toReservaDTO)
+        return reservaRepository.findAll().stream()
+                .map(reserva -> modelMapper.map(reserva, ReservaDTO.class))
                 .collect(Collectors.toList());
     }
 
     public ReservaDTO findById(Long id) {
-        var reserva = repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Reserva não encontrada!"));
-        return toReservaDTO(reserva);
+        var reserva = reservaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reserva não encontrada!"));
+        return modelMapper.map(reserva, ReservaDTO.class);
     }
-
-    public ReservaDTO save(ReservaDTO reservaDTO) {
-        Reserva reserva = toReserva(reservaDTO);
-        reserva = repo.save(reserva);
-        return toReservaDTO(reserva);
-    }
-
-    public ReservaDTO update(Long id, ReservaDTO reservaDTO) {
-
-        try {
-            Reserva buscaReserva = repo.getReferenceById(id);
-            buscaReserva.setDataHora(reservaDTO.dataHora());
-            buscaReserva.setQtdPessoa(reservaDTO.qtdPessoa());
-            buscaReserva.setRestaurante(reservaDTO.restaurante());
-            buscaReserva = repo.save(buscaReserva);
-            return toReservaDTO(buscaReserva);
-        } catch (EntityNotFoundException e) {
-            throw new ControllerNotFoundException("Reserva não encontrada!");
-        }
-    }
-
 
     public void delete(Long id) {
-        repo.deleteById(id);
+        reservaRepository.deleteById(id);
     }
-
-
-    private ReservaDTO toReservaDTO(Reserva reserva) {
-        return new ReservaDTO(
-                reserva.getId(),
-                reserva.getDataHora(),
-                reserva.getQtdPessoa(),
-                reserva.getRestaurante()
-
-        );
-    }
-
-    private Reserva toReserva(ReservaDTO reservaDTO){
-        return new Reserva(
-                reservaDTO.id(),
-                reservaDTO.dataHora(),
-                reservaDTO.qtdPessoa(),
-                reservaDTO.restaurante()
-
-        );
-    }
-
 
 }
