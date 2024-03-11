@@ -1,6 +1,8 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
+import com.techchallenge.restaurant.api.findfood.config.AppConfig;
 import com.techchallenge.restaurant.api.findfood.dto.AvaliacaoDTO;
+import com.techchallenge.restaurant.api.findfood.entities.Avaliacao;
 import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
 import com.techchallenge.restaurant.api.findfood.repository.AvaliacaoRepository;
 import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
@@ -13,6 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -44,11 +49,11 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     @Test
     void testRegistrarAvaliacao() {
         Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
-        avaliacaoDTO.setPontuacao(4);
+        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
 
         Restaurante restaurante = criarRestaurante();
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
+        when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacao());
 
         avaliacaoService.registrarAvaliacao(restauranteId, avaliacaoDTO);
 
@@ -58,7 +63,7 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     @Test
     void testRegistrarAvaliacaoRestauranteNaoEncontrado() {
         Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
+        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
 
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.empty());
 

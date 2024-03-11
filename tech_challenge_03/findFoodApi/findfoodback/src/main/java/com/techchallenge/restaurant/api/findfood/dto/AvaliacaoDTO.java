@@ -1,11 +1,13 @@
 package com.techchallenge.restaurant.api.findfood.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AvaliacaoDTO {
 
     @NotNull(value = "A pontuação não foi preenchida")

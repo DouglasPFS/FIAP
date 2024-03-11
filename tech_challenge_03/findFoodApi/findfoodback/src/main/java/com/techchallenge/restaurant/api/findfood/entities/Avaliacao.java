@@ -1,13 +1,15 @@
 package com.techchallenge.restaurant.api.findfood.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_avaliacao")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Avaliacao {
 
     @Id

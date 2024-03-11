@@ -1,5 +1,7 @@
 package com.techchallenge.restaurant.api.findfood.service.dados;
 
+import com.techchallenge.restaurant.api.findfood.dto.AvaliacaoDTO;
+import com.techchallenge.restaurant.api.findfood.entities.Avaliacao;
 import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
 
 public class AvaliacaoServiceDados {
@@ -11,6 +13,28 @@ public class AvaliacaoServiceDados {
                 .localizacao("Avenida Paulista")
                 .horarioFuncionamento("18h00 Até 23h00")
                 .tipoCozinha("Carnes")
+                .build();
+    }
+
+    public AvaliacaoDTO criarAvaliacaoDto(){
+        return AvaliacaoDTO.builder()
+                .emailCliente("alberto@gmail.com")
+                .nomeCliente("Alberto Torres")
+                .pontuacao(4)
+                .telefoneCliente("15 99331-2345")
+                .comentario("Restaurante bom, boa estrutura.")
+                .build();
+    }
+
+    public Avaliacao criarAvaliacao(){
+        return Avaliacao.builder()
+                .emailCliente("alberto@gmail.com")
+                .nomeCliente("Alberto Torres")
+                .pontuacao(4)
+                .telefoneCliente("15 99331-2345")
+                .comentario("Restaurante bom, boa estrutura.")
+                .id(1L)
+                .restaurante(criarRestaurante())
                 .build();
     }
 }
