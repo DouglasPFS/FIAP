@@ -1,21 +1,19 @@
-package com.techchallenge.restaurant.api.findfood.controller.exception;
+package com.techchallenge.restaurant.api.findfood.api.exceptionhandler;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
-public class ControllerExceptionHandler {
+public class ExceptionHandler {
 
     private ErrorMessage errorMessage = new ErrorMessage();
 
-    @ExceptionHandler(EntityNotFoundException.class)
+    @org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorMessage> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
 
@@ -27,7 +25,7 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(this.errorMessage);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
+    @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorMessage> IllegalArgument(IllegalArgumentException e, HttpServletRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;
 

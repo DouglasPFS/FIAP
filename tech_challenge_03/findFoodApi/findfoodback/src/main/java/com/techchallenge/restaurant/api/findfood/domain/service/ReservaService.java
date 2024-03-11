@@ -1,10 +1,10 @@
-package com.techchallenge.restaurant.api.findfood.service;
+package com.techchallenge.restaurant.api.findfood.domain.service;
 
-import com.techchallenge.restaurant.api.findfood.dto.ReservaDTO;
-import com.techchallenge.restaurant.api.findfood.entities.Reserva;
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
-import com.techchallenge.restaurant.api.findfood.repository.ReservaRepository;
-import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
+import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
+import com.techchallenge.restaurant.api.findfood.domain.model.Reserva;
+import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
+import com.techchallenge.restaurant.api.findfood.domain.repository.ReservaRepository;
+import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

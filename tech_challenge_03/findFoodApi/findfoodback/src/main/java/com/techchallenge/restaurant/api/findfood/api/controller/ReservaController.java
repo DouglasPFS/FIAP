@@ -1,7 +1,7 @@
-package com.techchallenge.restaurant.api.findfood.controller;
+package com.techchallenge.restaurant.api.findfood.api.controller;
 
-import com.techchallenge.restaurant.api.findfood.dto.ReservaDTO;
-import com.techchallenge.restaurant.api.findfood.service.ReservaService;
+import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
+import com.techchallenge.restaurant.api.findfood.domain.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;

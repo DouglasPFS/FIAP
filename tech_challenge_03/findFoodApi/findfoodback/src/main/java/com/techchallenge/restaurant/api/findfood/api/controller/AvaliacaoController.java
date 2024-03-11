@@ -1,7 +1,7 @@
-package com.techchallenge.restaurant.api.findfood.controller;
+package com.techchallenge.restaurant.api.findfood.api.controller;
 
-import com.techchallenge.restaurant.api.findfood.dto.AvaliacaoDTO;
-import com.techchallenge.restaurant.api.findfood.service.AvaliacaoService;
+import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
+import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;

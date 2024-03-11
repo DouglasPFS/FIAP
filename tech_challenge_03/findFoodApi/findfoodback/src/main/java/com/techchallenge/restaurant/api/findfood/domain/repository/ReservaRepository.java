@@ -1,7 +1,7 @@
-package com.techchallenge.restaurant.api.findfood.repository;
+package com.techchallenge.restaurant.api.findfood.domain.repository;
 
-import com.techchallenge.restaurant.api.findfood.entities.Reserva;
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
+import com.techchallenge.restaurant.api.findfood.domain.model.Reserva;
+import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

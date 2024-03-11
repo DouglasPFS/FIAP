@@ -1,4 +1,4 @@
-package com.techchallenge.restaurant.api.findfood.entities;
+package com.techchallenge.restaurant.api.findfood.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;

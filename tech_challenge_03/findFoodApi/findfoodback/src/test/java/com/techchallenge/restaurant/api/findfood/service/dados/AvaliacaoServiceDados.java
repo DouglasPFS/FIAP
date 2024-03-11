@@ -1,8 +1,8 @@
 package com.techchallenge.restaurant.api.findfood.service.dados;
 
-import com.techchallenge.restaurant.api.findfood.dto.AvaliacaoDTO;
-import com.techchallenge.restaurant.api.findfood.entities.Avaliacao;
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
+import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
+import com.techchallenge.restaurant.api.findfood.domain.model.Avaliacao;
+import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 
 public class AvaliacaoServiceDados {
 

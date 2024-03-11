@@ -1,4 +1,4 @@
-package com.techchallenge.restaurant.api.findfood.dto;
+package com.techchallenge.restaurant.api.findfood.api.model;
 
 import lombok.*;
 import org.jetbrains.annotations.NotNull;

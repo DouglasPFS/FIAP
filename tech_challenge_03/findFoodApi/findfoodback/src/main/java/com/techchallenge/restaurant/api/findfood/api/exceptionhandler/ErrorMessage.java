@@ -1,4 +1,4 @@
-package com.techchallenge.restaurant.api.findfood.controller.exception;
+package com.techchallenge.restaurant.api.findfood.api.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

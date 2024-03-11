@@ -1,11 +1,12 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.dto.AvaliacaoDTO;
-import com.techchallenge.restaurant.api.findfood.entities.Avaliacao;
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
-import com.techchallenge.restaurant.api.findfood.repository.AvaliacaoRepository;
-import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepository;
+import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
+import com.techchallenge.restaurant.api.findfood.domain.model.Avaliacao;
+import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
+import com.techchallenge.restaurant.api.findfood.domain.repository.AvaliacaoRepository;
+import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.service.dados.AvaliacaoServiceDados;
+import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

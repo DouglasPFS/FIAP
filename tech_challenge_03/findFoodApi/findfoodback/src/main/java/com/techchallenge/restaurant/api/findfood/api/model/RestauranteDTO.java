@@ -1,4 +1,4 @@
-package com.techchallenge.restaurant.api.findfood.dto;
+package com.techchallenge.restaurant.api.findfood.api.model;
 
 import lombok.Getter;
 import lombok.Setter;
