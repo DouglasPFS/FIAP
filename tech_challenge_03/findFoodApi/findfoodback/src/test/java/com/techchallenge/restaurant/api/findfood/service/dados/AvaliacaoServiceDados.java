@@ -37,4 +37,16 @@ public class AvaliacaoServiceDados {
                 .restaurante(criarRestaurante())
                 .build();
     }
+
+    public Avaliacao criarAvaliacaoComPontuacaoInvalidaAcima5(){
+        Avaliacao avaliacao = criarAvaliacao();
+        avaliacao.setPontuacao(6);
+        return avaliacao;
+    }
+
+    public Avaliacao criarAvaliacaoComPontuacaoInvalidaAbixo0(){
+        Avaliacao avaliacao = criarAvaliacao();
+        avaliacao.setPontuacao(-1);
+        return avaliacao;
+    }
 }

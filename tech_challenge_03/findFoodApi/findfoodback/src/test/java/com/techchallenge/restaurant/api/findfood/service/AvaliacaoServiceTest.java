@@ -1,6 +1,5 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.config.AppConfig;
 import com.techchallenge.restaurant.api.findfood.dto.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.entities.Avaliacao;
 import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
@@ -9,15 +8,11 @@ import com.techchallenge.restaurant.api.findfood.repository.RestauranteRepositor
 import com.techchallenge.restaurant.api.findfood.service.dados.AvaliacaoServiceDados;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -26,7 +21,6 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@Disabled
 public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
 
     @Mock
@@ -50,8 +44,8 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     void testRegistrarAvaliacao() {
         Long restauranteId = 1L;
         AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
-
         Restaurante restaurante = criarRestaurante();
+
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacao());
 
@@ -73,13 +67,28 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoPontuacaoInvalida() {
+    void testRegistrarAvaliacaoPontuacaoInvalidaAcimade5() {
         Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO();
+        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
+
+        Restaurante restaurante = criarRestaurante();
+        when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
+        when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacaoComPontuacaoInvalidaAcima5());
+
+        assertThrows(IllegalArgumentException.class, () -> avaliacaoService.registrarAvaliacao(restauranteId, avaliacaoDTO));
+
+        verify(avaliacaoRepository, never()).save(any());
+    }
+
+    @Test
+    void testRegistrarAvaliacaoPontuacaoInvalidaAbaixoDe0() {
+        Long restauranteId = 1L;
+        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
         avaliacaoDTO.setPontuacao(6);
 
         Restaurante restaurante = criarRestaurante();
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
+        when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacaoComPontuacaoInvalidaAbixo0());
 
         assertThrows(IllegalArgumentException.class, () -> avaliacaoService.registrarAvaliacao(restauranteId, avaliacaoDTO));
 
