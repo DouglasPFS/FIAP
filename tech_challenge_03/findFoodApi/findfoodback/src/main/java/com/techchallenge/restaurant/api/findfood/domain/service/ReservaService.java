@@ -2,7 +2,6 @@ package com.techchallenge.restaurant.api.findfood.domain.service;
 
 import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Reserva;
-import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.ReservaRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,8 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,12 +22,12 @@ public class ReservaService {
     private final ModelMapper modelMapper;
 
     public ReservaDTO reservarMesa(Long restauranteId, ReservaDTO reservaDTO){
-        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
+        var optionalRestaurante = restauranteRepository.findById(restauranteId);
         if (optionalRestaurante.isEmpty()) {
             throw new EntityNotFoundException("Restaurante não existe");
         }
 
-        Reserva reserva = modelMapper.map(reservaDTO, Reserva.class);
+        var reserva = modelMapper.map(reservaDTO, Reserva.class);
         reserva.setRestaurante(optionalRestaurante.get());
 
         if(haMesasDisponiveis(reserva)){
@@ -44,7 +41,7 @@ public class ReservaService {
         final int qtdePessoasPorMesa = 4;
         int qtdeTotalDeMesas = reserva.getRestaurante().getQuantidadeTotalDeMesas();
 
-        List<Reserva> listaDeReservas = reservaRepository.findReservasNoIntervaloDaNovaReservaSolicitada(reserva.getRestaurante(), reserva.getDataHoraInicio(), reserva.getDataHoraFim());
+        var listaDeReservas = reservaRepository.findReservasNoIntervaloDaNovaReservaSolicitada(reserva.getRestaurante(), reserva.getDataHoraInicio(), reserva.getDataHoraFim());
         int totalDeMesasReservadas = listaDeReservas.stream()
                 .mapToInt(value -> (int) Math.ceil((double)  value.getQtdPessoas() / qtdePessoasPorMesa))
                 .sum();
@@ -56,13 +53,13 @@ public class ReservaService {
     }
 
     public Collection<ReservaDTO> findAll(Long restauranteId) {
-        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
+        var optionalRestaurante = restauranteRepository.findById(restauranteId);
 
         if (optionalRestaurante.isEmpty()) {
             throw new EntityNotFoundException("Restaurante não existe");
         }
 
-        List<Reserva> reservaList = reservaRepository.findAllByRestaurante(optionalRestaurante.get());
+        var reservaList = reservaRepository.findAllByRestaurante(optionalRestaurante.get());
         return reservaList.stream()
                 .map(reserva -> modelMapper.map(reserva, ReservaDTO.class))
                 .toList();

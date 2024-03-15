@@ -1,11 +1,12 @@
 package com.techchallenge.restaurant.api.findfood.api.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestauranteDTO {
 
     private Long id;

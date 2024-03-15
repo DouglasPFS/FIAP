@@ -3,8 +3,7 @@ package com.techchallenge.restaurant.api.findfood.api.model;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

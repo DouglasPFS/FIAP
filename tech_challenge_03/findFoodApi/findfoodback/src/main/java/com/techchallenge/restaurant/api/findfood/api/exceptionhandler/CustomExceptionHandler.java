@@ -14,10 +14,9 @@ public class CustomExceptionHandler {
 
     private final ErrorMessage errorMessage = new ErrorMessage();
 
-
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorMessage> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
-        HttpStatus status = HttpStatus.NOT_FOUND;
+        var status = HttpStatus.NOT_FOUND;
 
         errorMessage.setTimestamp(LocalDateTime.now());
         errorMessage.setStatus(status.value());
@@ -29,7 +28,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorMessage> illegalArgument(IllegalArgumentException e, HttpServletRequest request){
-        HttpStatus status = HttpStatus.BAD_REQUEST;
+        var status = HttpStatus.BAD_REQUEST;
 
         errorMessage.setTimestamp(LocalDateTime.now());
         errorMessage.setStatus(status.value());
