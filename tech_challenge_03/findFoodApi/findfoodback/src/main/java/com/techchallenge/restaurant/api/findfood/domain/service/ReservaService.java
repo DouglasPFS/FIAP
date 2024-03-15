@@ -6,26 +6,23 @@ import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.ReservaRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ReservaService {
 
-    @Autowired
-    private ReservaRepository reservaRepository;
+    private final ReservaRepository reservaRepository;
 
-    @Autowired
-    private RestauranteRepository restauranteRepository;
+    private final RestauranteRepository restauranteRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public ReservaDTO reservarMesa(Long restauranteId, ReservaDTO reservaDTO){
         Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
@@ -58,10 +55,17 @@ public class ReservaService {
         return qtdeTotalMesasLivres >= mesasNecesariasParaReserva;
     }
 
-    public Collection<ReservaDTO> findAll() {
-        return reservaRepository.findAll().stream()
+    public Collection<ReservaDTO> findAll(Long restauranteId) {
+        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
+
+        if (optionalRestaurante.isEmpty()) {
+            throw new EntityNotFoundException("Restaurante não existe");
+        }
+
+        List<Reserva> reservaList = reservaRepository.findAllByRestaurante(optionalRestaurante.get());
+        return reservaList.stream()
                 .map(reserva -> modelMapper.map(reserva, ReservaDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public ReservaDTO findById(Long id) {

@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
@@ -31,7 +32,7 @@ class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
 
     @Test
     @Order(1)
-    void testRegistrarAvaliacao() {
+    void deveRegistrarAvaliacaoComSucesso() {
         var restauranteId = 1L;
         var avaliacaoDTO = criarAvaliacaoDto();
 
@@ -43,7 +44,7 @@ class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoRestauranteNaoEncontrado() {
+    void deveLancarExceptionAoTentarRegistrarAvaliacaoComRestauranteNaoEncontrado() {
         var restauranteId = 0L;
         var avaliacaoDTO = criarAvaliacaoDto();
 
@@ -53,7 +54,7 @@ class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoPontuacaoInvalidaAcimade5() {
+    void deveLancarExceptionAoTentarRegistrarAvaliacaoComPontuacaoAcimaDe5() {
         var restauranteId = 1L;
         var avaliacaoDTO = criarAvaliacaoDto();
         avaliacaoDTO.setPontuacao(6);
@@ -64,7 +65,7 @@ class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoPontuacaoInvalidaAbaixoDe0() {
+    void deveLancarExceptionAoTentarRegistrarAvaliacaoComPontuacaoAbaixoDe0() {
         var restauranteId = 1L;
         var avaliacaoDTO = criarAvaliacaoDto();
         avaliacaoDTO.setPontuacao(-1);
@@ -77,9 +78,21 @@ class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
 
     @Test
     @Order(2)
-    void testFindAll() {
-        var result = avaliacaoService.findAll();
+    void deveRetornarTodasAsAvaliacoesComSucesso() {
+        var restauranteId = 1L;
+
+        var result = avaliacaoService.findAll(restauranteId);
 
         assertThat(result).isNotEmpty();
+    }
+
+    @Test
+    void deveLancarExceptionAoTentarEncontrarAvalicoesEmRestauranteQueNaoExiste() {
+        var restauranteId = 0L;
+
+        assertThatThrownBy(() -> avaliacaoService.findAll(restauranteId))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("Restaurante não foi encontrada");
+
     }
 }

@@ -15,4 +15,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query("SELECT r FROM Reserva r WHERE r.restaurante = :restaurante " +
             "AND (r.dataHoraInicio BETWEEN :inicioReserva AND :fimReserva OR r.dataHoraFim BETWEEN :inicioReserva AND :fimReserva)")
     List<Reserva> findReservasNoIntervaloDaNovaReservaSolicitada(Restaurante restaurante, LocalDateTime inicioReserva, LocalDateTime fimReserva);
+
+    List<Reserva> findAllByRestaurante(Restaurante restaurante);
 }

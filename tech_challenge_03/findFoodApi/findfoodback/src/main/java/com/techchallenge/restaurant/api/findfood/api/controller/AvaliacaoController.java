@@ -2,7 +2,7 @@ package com.techchallenge.restaurant.api.findfood.api.controller;
 
 import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,10 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/restaurantes")
+@AllArgsConstructor
 public class AvaliacaoController {
 
-    @Autowired
-    private AvaliacaoService service;
+    private final AvaliacaoService service;
 
     @PostMapping("/{restauranteId}/avaliar")
     public ResponseEntity<String> registrarAvaliacao(@PathVariable Long restauranteId, @RequestBody AvaliacaoDTO avaliacaoDTO) {
@@ -22,8 +22,8 @@ public class AvaliacaoController {
     }
 
     @GetMapping("/{restauranteId}/avaliacoes")
-    public ResponseEntity<Collection<AvaliacaoDTO>> findAll(){
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<Collection<AvaliacaoDTO>> findAll(@PathVariable Long restauranteId){
+        return ResponseEntity.ok(service.findAll(restauranteId));
     }
 
 }

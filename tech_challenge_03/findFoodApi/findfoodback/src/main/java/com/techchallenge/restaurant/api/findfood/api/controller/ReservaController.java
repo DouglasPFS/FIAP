@@ -2,7 +2,7 @@ package com.techchallenge.restaurant.api.findfood.api.controller;
 
 import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
 import com.techchallenge.restaurant.api.findfood.domain.service.ReservaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,10 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/restaurantes")
+@AllArgsConstructor
 public class ReservaController {
 
-    @Autowired
-    private ReservaService service;
+    private final ReservaService service;
 
     @PostMapping("/{restauranteId}/reservarMesa")
     public ResponseEntity<ReservaDTO> reservarMesa(@PathVariable Long restauranteId, @RequestBody ReservaDTO reservaDTO) {
@@ -24,8 +24,8 @@ public class ReservaController {
     }
 
     @GetMapping("/{restauranteId}/reservas")
-    public ResponseEntity<Collection<ReservaDTO>> findAll() {
-        var reservas = service.findAll();
+    public ResponseEntity<Collection<ReservaDTO>> findAll(@PathVariable Long restauranteId) {
+        var reservas = service.findAll(restauranteId);
         return ResponseEntity.ok(reservas);
     }
 

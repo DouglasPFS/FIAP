@@ -4,22 +4,20 @@ import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class RestauranteService {
 
-    @Autowired
-    private RestauranteRepository restauranteRepository;
+    private final RestauranteRepository restauranteRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public RestauranteDTO save(RestauranteDTO restauranteDTO) {
         Restaurante restaurante = restauranteRepository.save(modelMapper.map(restauranteDTO, Restaurante.class));
@@ -33,13 +31,13 @@ public class RestauranteService {
     public Collection<RestauranteDTO> findAll() {
         return restauranteRepository.findAll().stream()
                 .map(restaurante -> modelMapper.map(restaurante, RestauranteDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public RestauranteDTO update(Long restauranteId, RestauranteDTO restauranteDTO) {
         Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
 
-        if(optionalRestaurante.isPresent()){
+        if(optionalRestaurante.isPresent()) {
             Restaurante restaurante = optionalRestaurante.get();
             modelMapper.map(restauranteDTO, restaurante);
 

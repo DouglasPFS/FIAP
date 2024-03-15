@@ -1,8 +1,6 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Avaliacao;
-import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.AvaliacaoRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.service.dados.AvaliacaoServiceDados;
@@ -15,14 +13,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
+class AvaliacaoServiceTest extends AvaliacaoServiceDados {
 
     @Mock
     private AvaliacaoRepository avaliacaoRepository;
@@ -42,10 +40,10 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacao() {
-        Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
-        Restaurante restaurante = criarRestaurante();
+    void deveRegistrarAvaliacaoComSucesso() {
+        var restauranteId = 1L;
+        var avaliacaoDTO = criarAvaliacaoDto();
+        var restaurante = criarRestaurante();
 
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacao());
@@ -56,9 +54,9 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoRestauranteNaoEncontrado() {
-        Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
+    void deveLancarExceptionAoTentarRegistrarAvaliacaoComRestauranteNaoEncontrado() {
+        var restauranteId = 1L;
+        var avaliacaoDTO = criarAvaliacaoDto();
 
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.empty());
 
@@ -68,11 +66,11 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoPontuacaoInvalidaAcimade5() {
-        Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
+    void deveLancarExceptionAoTentarRegistrarAvaliacaoComPontuacaoAcimaDe5() {
+        var restauranteId = 1L;
+        var avaliacaoDTO = criarAvaliacaoDto();
+        var restaurante = criarRestaurante();
 
-        Restaurante restaurante = criarRestaurante();
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacaoComPontuacaoInvalidaAcima5());
 
@@ -82,12 +80,12 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testRegistrarAvaliacaoPontuacaoInvalidaAbaixoDe0() {
-        Long restauranteId = 1L;
-        AvaliacaoDTO avaliacaoDTO = criarAvaliacaoDto();
+    void deveLancarExceptionAoTentarRegistrarAvaliacaoComPontuacaoAbaixoDe0() {
+        var restauranteId = 1L;
+        var restaurante = criarRestaurante();
+        var avaliacaoDTO = criarAvaliacaoDto();
         avaliacaoDTO.setPontuacao(6);
 
-        Restaurante restaurante = criarRestaurante();
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacaoComPontuacaoInvalidaAbixo0());
 
@@ -97,12 +95,28 @@ public class AvaliacaoServiceTest extends AvaliacaoServiceDados {
     }
 
     @Test
-    void testFindAll() {
+    void deveRetornarTodasAsAvaliacoesComSucesso() {
+        var restauranteId = 1L;
+        var restaurante = criarRestaurante();
+
+        when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(avaliacaoRepository.findAll()).thenReturn(Collections.emptyList());
 
-        Collection<AvaliacaoDTO> result = avaliacaoService.findAll();
+        var lista = avaliacaoService.findAll(restauranteId);
 
-        assertNotNull(result);
-        assertTrue(result.isEmpty());
+        assertNotNull(lista);
+        assertTrue(lista.isEmpty());
+    }
+
+    @Test
+    void deveLancarExceptionAoTentarEncontrarAvalicoesEmRestauranteQueNaoExiste() {
+        var restauranteId = 1L;
+
+        when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> avaliacaoService.findAll(restauranteId))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("Restaurante não foi encontrada");
+
     }
 }

@@ -6,24 +6,21 @@ import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.AvaliacaoRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class AvaliacaoService {
 
-    @Autowired
-    private AvaliacaoRepository avaliacaoRepository;
+    private final AvaliacaoRepository avaliacaoRepository;
 
-    @Autowired
-    private RestauranteRepository restauranteRepository;
+    private final RestauranteRepository restauranteRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public void registrarAvaliacao(Long restauranteId, AvaliacaoDTO avaliacaoDTO) {
         Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
@@ -42,11 +39,17 @@ public class AvaliacaoService {
     }
 
 
-    public Collection<AvaliacaoDTO> findAll() {
-        return avaliacaoRepository.findAll()
-                .stream()
+    public List<AvaliacaoDTO> findAll(Long restauranteId) {
+        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
+
+        if(optionalRestaurante.isEmpty()){
+            throw new EntityNotFoundException("Restaurante não foi encontrada");
+        }
+
+        List<Avaliacao> avaliacaoList = avaliacaoRepository.findAllByRestaurante(optionalRestaurante.get());
+        return avaliacaoList.stream()
                 .map(avaliacao -> modelMapper.map(avaliacao, AvaliacaoDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

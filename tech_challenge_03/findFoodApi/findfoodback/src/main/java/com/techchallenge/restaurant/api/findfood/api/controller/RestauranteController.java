@@ -3,7 +3,7 @@ package com.techchallenge.restaurant.api.findfood.api.controller;
 import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/restaurantes")
+@AllArgsConstructor
 public class RestauranteController {
 
-    @Autowired
-    private RestauranteService service;
+    private final RestauranteService service;
 
     @PostMapping
     public ResponseEntity<RestauranteDTO> save(@RequestBody RestauranteDTO restauranteDTO) {
