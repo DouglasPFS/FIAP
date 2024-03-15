@@ -39,13 +39,13 @@ public class AvaliacaoServiceDados {
     }
 
     public Avaliacao criarAvaliacaoComPontuacaoInvalidaAcima5(){
-        Avaliacao avaliacao = criarAvaliacao();
+        var avaliacao = criarAvaliacao();
         avaliacao.setPontuacao(6);
         return avaliacao;
     }
 
     public Avaliacao criarAvaliacaoComPontuacaoInvalidaAbixo0(){
-        Avaliacao avaliacao = criarAvaliacao();
+        var avaliacao = criarAvaliacao();
         avaliacao.setPontuacao(-1);
         return avaliacao;
     }
