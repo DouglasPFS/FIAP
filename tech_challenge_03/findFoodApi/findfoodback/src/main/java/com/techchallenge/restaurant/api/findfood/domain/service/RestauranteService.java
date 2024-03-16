@@ -1,7 +1,7 @@
-package com.techchallenge.restaurant.api.findfood.service;
+package com.techchallenge.restaurant.api.findfood.domain.service;
 
-import com.techchallenge.restaurant.api.findfood.dto.RestauranteDTO;
-import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
+import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
+import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 
 import java.util.Collection;
 import java.util.List;

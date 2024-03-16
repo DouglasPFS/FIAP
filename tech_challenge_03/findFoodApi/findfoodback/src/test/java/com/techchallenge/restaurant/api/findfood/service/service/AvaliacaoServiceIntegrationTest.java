@@ -1,4 +1,4 @@
-package com.techchallenge.restaurant.api.findfood.service;
+package com.techchallenge.restaurant.api.findfood.service.service;
 
 import com.techchallenge.restaurant.api.findfood.domain.repository.AvaliacaoRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
