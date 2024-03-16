@@ -1,10 +1,10 @@
-package com.techchallenge.restaurant.api.findfood.service.service;
+package com.techchallenge.restaurant.api.findfood.service;
 
 import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteServiceImpl;
-import com.techchallenge.restaurant.api.findfood.service.utils.RestauranteFixture;
+import com.techchallenge.restaurant.api.findfood.dados.RestauranteDados;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class RestauranteServiceIT {
     void devePermitirRegistrarRestaurante(){
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restaurante = modelMapper.map(restauranteDto, Restaurante.class);  // Use the initialized modelMapper
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
 

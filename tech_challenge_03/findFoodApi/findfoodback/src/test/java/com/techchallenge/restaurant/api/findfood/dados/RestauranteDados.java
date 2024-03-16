@@ -1,9 +1,9 @@
-package com.techchallenge.restaurant.api.findfood.service.utils;
+package com.techchallenge.restaurant.api.findfood.dados;
 
 import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 
-public class RestauranteFixture {
+public class RestauranteDados {
 
     public static RestauranteDTO criarRestauranteDtoValido() {
         return RestauranteDTO.builder()

@@ -1,10 +1,10 @@
-package com.techchallenge.restaurant.api.findfood.service.service;
+package com.techchallenge.restaurant.api.findfood.service;
 
 import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteServiceImpl;
-import com.techchallenge.restaurant.api.findfood.service.utils.RestauranteFixture;
+import com.techchallenge.restaurant.api.findfood.dados.RestauranteDados;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +45,7 @@ public class RestauranteServiceTest {
     void devePermitirRegistrarRestaurante(){
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restaurante = modelMapper.map(restauranteDto, Restaurante.class);  // Use the initialized modelMapper
         when(restauranteRepository.save(restaurante)).thenReturn(restaurante);
 
@@ -55,19 +55,19 @@ public class RestauranteServiceTest {
         // Assert
         verify(restauranteRepository).save(eq(restaurante));
         verify(restauranteRepository, times(1)).save(restaurante);
-        assertThat(restauranteRegistrado.getId()).isEqualTo(RestauranteFixture.criarRestauranteDtoValido().getId());
-        assertThat(restauranteRegistrado.getNome()).isEqualTo(RestauranteFixture.criarRestauranteDtoValido().getNome());
-        assertThat(restauranteRegistrado.getTipoCozinha()).isEqualTo(RestauranteFixture.criarRestauranteDtoValido().getTipoCozinha());
-        assertThat(restauranteRegistrado.getHorarioFuncionamento()).isEqualTo(RestauranteFixture.criarRestauranteDtoValido().getHorarioFuncionamento());
-        assertThat(restauranteRegistrado.getLocalizacao()).isEqualTo(RestauranteFixture.criarRestauranteDtoValido().getLocalizacao());
-        assertThat(restauranteRegistrado.getQuantidadeTotalDeMesas()).isEqualTo(RestauranteFixture.criarRestauranteDtoValido().getQuantidadeTotalDeMesas());
+        assertThat(restauranteRegistrado.getId()).isEqualTo(RestauranteDados.criarRestauranteDtoValido().getId());
+        assertThat(restauranteRegistrado.getNome()).isEqualTo(RestauranteDados.criarRestauranteDtoValido().getNome());
+        assertThat(restauranteRegistrado.getTipoCozinha()).isEqualTo(RestauranteDados.criarRestauranteDtoValido().getTipoCozinha());
+        assertThat(restauranteRegistrado.getHorarioFuncionamento()).isEqualTo(RestauranteDados.criarRestauranteDtoValido().getHorarioFuncionamento());
+        assertThat(restauranteRegistrado.getLocalizacao()).isEqualTo(RestauranteDados.criarRestauranteDtoValido().getLocalizacao());
+        assertThat(restauranteRegistrado.getQuantidadeTotalDeMesas()).isEqualTo(RestauranteDados.criarRestauranteDtoValido().getQuantidadeTotalDeMesas());
 
     }
     @Test
     void devePermitirBuscarRestaurantePorNome() {
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
 
@@ -91,7 +91,7 @@ public class RestauranteServiceTest {
     void devePermitirBuscarRestaurantePorLocalizacao(){
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
         // Simular a inserção do restaurante no banco de dados
@@ -115,7 +115,7 @@ public class RestauranteServiceTest {
     void devePermitirBuscarRestaurantePorTipoCozinha(){
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
         // Simular a inserção do restaurante no banco de dados
@@ -139,7 +139,7 @@ public class RestauranteServiceTest {
     void devePermitirBuscarRestaurantesPorId(){
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
         // Simular a inserção do restaurante no banco de dados
@@ -159,7 +159,7 @@ public class RestauranteServiceTest {
     void devePermitirBuscarTodosRestaurantes(){
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
         // Simular a inserção do restaurante no banco de dados
@@ -180,7 +180,7 @@ public class RestauranteServiceTest {
 
         // Arrange
         Long restauranteId = 1L;
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
         // Simular a inserção do restaurante no banco de dados
@@ -201,7 +201,7 @@ public class RestauranteServiceTest {
     void devePermitirDeletarRestaurantes() {
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restauranteSalvo = modelMapper.map(restauranteDto, Restaurante.class);
 
         // Simular a inserção do restaurante no banco de dados
@@ -222,7 +222,7 @@ public class RestauranteServiceTest {
     void deveLancarExcecaoAoSalvarRestauranteComNomeVazio() {
 
         // Arrange
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
         Restaurante restaurante = modelMapper.map(restauranteDto, Restaurante.class);
         restaurante.setNome("");
         when(restauranteRepository.save(restaurante)).thenThrow(DataIntegrityViolationException.class);
@@ -242,7 +242,7 @@ public class RestauranteServiceTest {
     void deveLancarExcecaoAoBuscarNomeRestauranteInexistente() {
 
         // Arrange
-        RestauranteDTO restauranteSalvo = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteSalvo = RestauranteDados.criarRestauranteDtoValido();
         when(restauranteRepository.findByNomeIgnoreCaseLikeOrLocalizacaoIgnoreCaseLikeOrTipoCozinhaIgnoreCaseLike(eq(restauranteSalvo.getNome()), any(), any())).thenReturn(Collections.emptyList());
 
         // Act
@@ -258,7 +258,7 @@ public class RestauranteServiceTest {
     void deveLancarExcecaoAoBuscarLocalizacaoRestauranteInexistente() {
 
         // Arrange
-        RestauranteDTO restauranteSalvo = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteSalvo = RestauranteDados.criarRestauranteDtoValido();
         when(restauranteRepository.findByNomeIgnoreCaseLikeOrLocalizacaoIgnoreCaseLikeOrTipoCozinhaIgnoreCaseLike(any(), eq(restauranteSalvo.getLocalizacao()), any())).thenReturn(Collections.emptyList());
 
         // Act
@@ -274,7 +274,7 @@ public class RestauranteServiceTest {
     void deveLancarExcecaoAoBuscarTipoCozinhaRestauranteInexistente() {
 
         // Arrange
-        RestauranteDTO restauranteSalvo = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteSalvo = RestauranteDados.criarRestauranteDtoValido();
         when(restauranteRepository.findByNomeIgnoreCaseLikeOrLocalizacaoIgnoreCaseLikeOrTipoCozinhaIgnoreCaseLike(any(), any(), eq(restauranteSalvo.getTipoCozinha()))).thenReturn(Collections.emptyList());
 
         // Act
@@ -291,7 +291,7 @@ public class RestauranteServiceTest {
     void deveLancarExcecaoAoBuscarNenhumParametroRestauranteInexistente() {
 
         // Arrange
-        RestauranteDTO restauranteSalvo = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteSalvo = RestauranteDados.criarRestauranteDtoValido();
         when(restauranteRepository.findByNomeIgnoreCaseLikeOrLocalizacaoIgnoreCaseLikeOrTipoCozinhaIgnoreCaseLike(any(), any(), any())).thenReturn(Collections.emptyList());
 
         // Act
@@ -323,7 +323,7 @@ public class RestauranteServiceTest {
 
         // Arrange
         Long restauranteId = 100L; // ID inexistente
-        RestauranteDTO restauranteDto = RestauranteFixture.criarRestauranteDtoValido();
+        RestauranteDTO restauranteDto = RestauranteDados.criarRestauranteDtoValido();
 
         // Act
         try {

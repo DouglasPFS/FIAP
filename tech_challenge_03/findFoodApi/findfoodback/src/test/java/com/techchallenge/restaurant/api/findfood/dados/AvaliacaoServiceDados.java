@@ -1,4 +1,4 @@
-package com.techchallenge.restaurant.api.findfood.service.dados;
+package com.techchallenge.restaurant.api.findfood.dados;
 
 import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Avaliacao;
