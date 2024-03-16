@@ -2,7 +2,6 @@ package com.techchallenge.restaurant.api.findfood.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techchallenge.restaurant.api.findfood.api.controller.ReservaController;
-import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
 import com.techchallenge.restaurant.api.findfood.dados.ReservaDados;
 import com.techchallenge.restaurant.api.findfood.domain.service.ReservaService;
@@ -20,8 +19,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ReservaController.class)
@@ -54,7 +52,7 @@ class ReservaControllerTest extends ReservaDados {
     }
 
     @Test
-    void findAll() throws Exception {
+    void deveRetornarTodasAsReservasParaUmRestauranteComSucesso() throws Exception {
         Long restauranteId = 1L;
         List<ReservaDTO> reservas = Arrays.asList(criarReservaDto(), criarReservaDto());
 
@@ -65,6 +63,32 @@ class ReservaControllerTest extends ReservaDados {
                 .andExpect(jsonPath("$.size()").value(reservas.size()));
 
         verify(reservaService, times(1)).findAll(restauranteId);
+    }
+
+    @Test
+    void deveRetornarUmaReservaComSucesso() throws Exception {
+        ReservaDTO reservaDTO = criarReservaDto();
+
+        when(reservaService.findById(anyLong())).thenReturn(reservaDTO);
+
+        mockMvc.perform(get("/api/restaurantes/reserva/{reservaId}", reservaDTO.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().json(objectMapper.writeValueAsString(reservaDTO)));
+
+        verify(reservaService, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void deveExcluirUmaReservaComSucesso() throws Exception {
+        ReservaDTO reservaDTO = criarReservaDto();
+
+        doNothing().when(reservaService).delete(anyLong());
+
+        mockMvc.perform(delete("/api/restaurantes/reserva/{reservaId}", reservaDTO.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Reserva excluída com sucesso"));
+
+        verify(reservaService, times(1)).delete(anyLong());
     }
 
 }
