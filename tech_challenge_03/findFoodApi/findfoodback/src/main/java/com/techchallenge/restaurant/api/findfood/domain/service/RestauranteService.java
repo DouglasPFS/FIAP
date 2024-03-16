@@ -1,57 +1,26 @@
-package com.techchallenge.restaurant.api.findfood.domain.service;
+package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
-import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
-import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
-import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
+import com.techchallenge.restaurant.api.findfood.dto.RestauranteDTO;
+import com.techchallenge.restaurant.api.findfood.entities.Restaurante;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@AllArgsConstructor
-public class RestauranteService {
+public interface RestauranteService {
 
-    private final RestauranteRepository restauranteRepository;
+    RestauranteDTO save(RestauranteDTO restauranteDTO);
 
-    private final ModelMapper modelMapper;
+    List<Restaurante> findRestaurantePorNomeOuLocalizacaoOuTipoDeCozinha(String nome, String localizacao, String tipoDeCozinha);
 
-    public RestauranteDTO save(RestauranteDTO restauranteDTO) {
-        Restaurante restaurante = restauranteRepository.save(modelMapper.map(restauranteDTO, Restaurante.class));
-        return modelMapper.map(restaurante, RestauranteDTO.class);
-    }
+    Collection<RestauranteDTO> findAll();
 
-    public List<Restaurante> findRestaurantePorNomeOuLocalizacaoOuTipoDeCozinha(String nome, String localizacao, String tipoDeCozinha) {
-        return restauranteRepository.findByNomeIgnoreCaseLikeOrLocalizacaoIgnoreCaseLikeOrTipoCozinhaIgnoreCaseLike(nome, localizacao, tipoDeCozinha);
-    }
+    Optional<RestauranteDTO> findById(Long id);
 
-    public Collection<RestauranteDTO> findAll() {
-        return restauranteRepository.findAll().stream()
-                .map(restaurante -> modelMapper.map(restaurante, RestauranteDTO.class))
-                .toList();
-    }
+    RestauranteDTO update(Long restauranteId, RestauranteDTO restauranteDTO);
 
-    public RestauranteDTO update(Long restauranteId, RestauranteDTO restauranteDTO) {
-        Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
-
-        if(optionalRestaurante.isPresent()) {
-            Restaurante restaurante = optionalRestaurante.get();
-            modelMapper.map(restauranteDTO, restaurante);
-
-            restaurante = restauranteRepository.save(restaurante);
-
-            return modelMapper.map(restaurante, RestauranteDTO.class);
-        } else {
-            throw new EntityNotFoundException("Restaurante não foi encontrado");
-        }
-    }
+    void delete(Long id);
 
 
-    public void delete(Long id) {
-        restauranteRepository.deleteById(id);
-    }
 
 }
