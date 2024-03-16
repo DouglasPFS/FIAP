@@ -5,26 +5,21 @@ import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class RestauranteServiceImpl implements RestauranteService {
 
     private final RestauranteRepository restauranteRepository;
 
-    @Autowired
-    private final ModelMapper modelMapper = new ModelMapper();
-
-    public RestauranteServiceImpl(RestauranteRepository restauranteRepository) {
-        this.restauranteRepository = restauranteRepository;
-    }
+    private final ModelMapper modelMapper;
 
     public RestauranteDTO save(RestauranteDTO restauranteDTO) {
         Restaurante restaurante = restauranteRepository.save(modelMapper.map(restauranteDTO, Restaurante.class));
@@ -67,7 +62,7 @@ public class RestauranteServiceImpl implements RestauranteService {
     public Collection<RestauranteDTO> findAll() {
         return restauranteRepository.findAll().stream()
                 .map(restaurante -> modelMapper.map(restaurante, RestauranteDTO.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 

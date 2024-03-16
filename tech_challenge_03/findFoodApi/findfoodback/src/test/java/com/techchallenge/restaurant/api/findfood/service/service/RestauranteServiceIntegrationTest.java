@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-public class RestauranteServiceIT {
+class RestauranteServiceIntegrationTest {
 
     private final ModelMapper modelMapper = new ModelMapper();
     @Mock
@@ -28,7 +28,6 @@ public class RestauranteServiceIT {
     @BeforeEach
     void setup() {
         mock = MockitoAnnotations.openMocks(this);
-        restauranteService = new RestauranteServiceImpl(restauranteRepository);
     }
     @AfterEach
     void tearDown() throws Exception {
