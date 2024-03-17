@@ -3,7 +3,7 @@ package com.techchallenge.restaurant.api.findfood.service;
 import com.techchallenge.restaurant.api.findfood.domain.model.Avaliacao;
 import com.techchallenge.restaurant.api.findfood.domain.repository.AvaliacaoRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
-import com.techchallenge.restaurant.api.findfood.dados.AvaliacaoServiceDados;
+import com.techchallenge.restaurant.api.findfood.dados.AvaliacaoDados;
 import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class AvaliacaoServiceTest extends AvaliacaoServiceDados {
+class AvaliacaoServiceTest extends AvaliacaoDados {
 
     @Mock
     private AvaliacaoRepository avaliacaoRepository;

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-public class RestauranteServiceIT {
+public class RestauranteServiceIntegrationTest {
 
     private final ModelMapper modelMapper = new ModelMapper();
     @Mock
