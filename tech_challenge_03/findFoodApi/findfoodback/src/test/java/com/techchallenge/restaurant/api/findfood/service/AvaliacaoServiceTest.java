@@ -90,7 +90,7 @@ class AvaliacaoServiceTest extends AvaliacaoDados {
             avaliacaoDTO.setPontuacao(6);
 
             when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
-            when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacaoComPontuacaoInvalidaAbixo0());
+            when(modelMapper.map(avaliacaoDTO, Avaliacao.class)).thenReturn(criarAvaliacaoComPontuacaoInvalidaAbaixo0());
 
             assertThrows(IllegalArgumentException.class, () -> avaliacaoService.registrarAvaliacao(restauranteId, avaliacaoDTO));
 

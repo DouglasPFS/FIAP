@@ -70,12 +70,25 @@
             <artifactId>jakarta.persistence-api</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.3.0</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>kg.apc</groupId>
             <artifactId>jmeter-plugins-extras</artifactId>
             <version>1.4.0</version>
         </dependency>
-
 
     </dependencies>
 

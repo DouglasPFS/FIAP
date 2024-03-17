@@ -44,7 +44,7 @@ public class AvaliacaoDados {
         return avaliacao;
     }
 
-    public Avaliacao criarAvaliacaoComPontuacaoInvalidaAbixo0(){
+    public Avaliacao criarAvaliacaoComPontuacaoInvalidaAbaixo0(){
         var avaliacao = criarAvaliacao();
         avaliacao.setPontuacao(-1);
         return avaliacao;
