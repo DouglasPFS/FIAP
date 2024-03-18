@@ -28,6 +28,7 @@ debug-api:
 ## Test
 
 unit-test:
+	@./mvnw $(MVN_ARGS) wrapper:wrapper
 	@./mvnw $(MVN_ARGS) test
 
 integration-test:
