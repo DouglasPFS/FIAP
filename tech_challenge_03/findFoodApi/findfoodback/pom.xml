@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+	<relativePath/>
     </parent>
     <groupId>com.techchallenge.restaurant.api.findfood</groupId>
     <artifactId>findfood</artifactId>
@@ -84,11 +84,8 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>kg.apc</groupId>
-            <artifactId>jmeter-plugins-extras</artifactId>
-            <version>1.4.0</version>
-        </dependency>
+
+
 
     </dependencies>
 

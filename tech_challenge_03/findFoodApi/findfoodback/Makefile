@@ -33,6 +33,7 @@ unit-test:
 integration-test:
 # @./mvnw $(MVN_ARGS) failsafe:integration-test
 	@./mvnw $(MVN_ARGS) test -P integration-test
+	@./mvnw jacoco:report
 
 system-test:
 	@./mvnw $(MVN_ARGS) test -Psystem-test
@@ -42,7 +43,7 @@ performance-test:
 	#@./mvnw ${MVN_ARGS} jmeter:jmeter -Pperformance-test
 	@./mvnw clean verify -Pperformance-test
 
-test: unit-test integration-test
+test: unit-test integration-test performance-test
 
 
 report-maven: # Gerar relatorio HTML utilizando maven
