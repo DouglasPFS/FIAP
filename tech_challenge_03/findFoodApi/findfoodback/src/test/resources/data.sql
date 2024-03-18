@@ -3,7 +3,7 @@ DELETE FROM tb_reserva;
 DELETE FROM tb_restaurante;
 
 INSERT INTO tb_restaurante (id, nome, localizacao, tipo_cozinha, horario_funcionamento, quantidade_total_de_mesas)
-VALUES (1, 'Restaurant Teste', 'São Paulo', 'Carnes e Churrasco', '10h00 até 22h00', 50);
+VALUES (1, 'Restaurante Teste', 'São Paulo', 'Carnes e Churrasco', '10h00 até 22h00', 20);
 
 INSERT INTO tb_reserva (id, data_hora_inicio, data_hora_fim, qtd_pessoas, restaurante_id, nome_cliente, email_cliente, telefone_cliente)
 VALUES (1, '2024-03-17 19:00', '2024-03-17 22:00', 4, 1, 'João da Silva', 'joao@gmail.com', '11 99622-3465'),

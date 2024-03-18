@@ -120,11 +120,9 @@ public class ReservaServiceIntegrationTest extends ReservaDados {
         var restauranteId = 1L;
         var reservaDTO = criarReservaDto();
         reservaDTO.setQtdPessoas(200);
-        reservaDTO.setDataHoraInicio(LocalDateTime.parse("2024-03-27T10:15:30"));
-        reservaDTO.setDataHoraFim(LocalDateTime.parse("2024-03-27T12:15:30"));
+        reservaDTO.setDataHoraInicio(LocalDateTime.now());
+        reservaDTO.setDataHoraFim(LocalDateTime.now().plusHours(2));
 
-
-            //assertThrows(IllegalArgumentException.class, () -> reservaService.reservarMesa(restauranteId, reservaDTO));
             assertThatThrownBy(() -> reservaService.reservarMesa(restauranteId, reservaDTO))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("Não há lugares disponíveis nesse horário para o Restaurante: Restaurante Teste");
