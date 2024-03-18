@@ -1,6 +1,7 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
 import com.techchallenge.restaurant.api.findfood.dados.ReservaDados;
+import com.techchallenge.restaurant.api.findfood.domain.exception.NaoHaMesasDisponiveisException;
 import com.techchallenge.restaurant.api.findfood.domain.model.Reserva;
 import com.techchallenge.restaurant.api.findfood.domain.repository.ReservaRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
@@ -19,7 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ReservaServiceTest extends ReservaDados {
+class ReservaServiceTest extends ReservaDados {
 
     @Mock
     private ReservaRepository reservaRepository;
@@ -40,7 +41,7 @@ public class ReservaServiceTest extends ReservaDados {
 
 
     @Test
-    public void deveReservarMesaComRestauranteComSucesso() {
+    void deveReservarMesaComRestauranteComSucesso() {
         var restauranteId = 1L;
         var reservaDTO = criarReservaDto();
         var restaurante = criarRestauranteValido();
@@ -82,7 +83,7 @@ public class ReservaServiceTest extends ReservaDados {
 
 
     @Test
-    public void deveRemoverReservaComSucesso() {
+    void deveRemoverReservaComSucesso() {
         Long reservaId = 1L;
 
         reservaService.delete(reservaId);
@@ -92,7 +93,7 @@ public class ReservaServiceTest extends ReservaDados {
 
 
     @Test
-    public void deveLancarExceptionAoTentarReservarMesaSemLugaresDisponiveis() {
+    void deveLancarExceptionAoTentarReservarMesaSemLugaresDisponiveis() {
         var restauranteId = 1L;
         var reservaDTO = criarReservaDto();
         var restaurante = criarRestauranteValido();
@@ -100,12 +101,12 @@ public class ReservaServiceTest extends ReservaDados {
         when(restauranteRepository.findById(restauranteId)).thenReturn(Optional.of(restaurante));
         when(modelMapper.map(reservaDTO, Reserva.class)).thenReturn(criarReservaSemLugaresDisponiveis());
 
-        assertThrows(IllegalArgumentException.class, () -> reservaService.reservarMesa(restauranteId, reservaDTO));
+        assertThrows(NaoHaMesasDisponiveisException.class, () -> reservaService.reservarMesa(restauranteId, reservaDTO));
 
     }
 
     @Test
-    public void deveBuscarReservaPeloIdComSucesso() {
+    void deveBuscarReservaPeloIdComSucesso() {
         Long reservaId = 1L;
         var restauranteId = 1L;
         var reservaDTO = criarReservaDto();

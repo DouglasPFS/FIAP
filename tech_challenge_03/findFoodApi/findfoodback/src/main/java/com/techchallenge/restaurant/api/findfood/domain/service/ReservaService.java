@@ -1,6 +1,7 @@
 package com.techchallenge.restaurant.api.findfood.domain.service;
 
 import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
+import com.techchallenge.restaurant.api.findfood.domain.exception.NaoHaMesasDisponiveisException;
 import com.techchallenge.restaurant.api.findfood.domain.model.Reserva;
 import com.techchallenge.restaurant.api.findfood.domain.repository.ReservaRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
@@ -33,7 +34,7 @@ public class ReservaService {
         if(haMesasDisponiveis(reserva)){
             return modelMapper.map(reservaRepository.save(reserva), ReservaDTO.class);
         } else {
-            throw new IllegalArgumentException("Não há lugares disponíveis nesse horário para o Restaurante: " + optionalRestaurante.get().getNome());
+            throw new NaoHaMesasDisponiveisException("Não há lugares disponíveis nesse horário para o Restaurante: " + optionalRestaurante.get().getNome());
         }
     }
 

@@ -2,6 +2,7 @@ package com.techchallenge.restaurant.api.findfood.service;
 
 import com.techchallenge.restaurant.api.findfood.api.model.ReservaDTO;
 import com.techchallenge.restaurant.api.findfood.dados.ReservaDados;
+import com.techchallenge.restaurant.api.findfood.domain.exception.NaoHaMesasDisponiveisException;
 import com.techchallenge.restaurant.api.findfood.domain.repository.ReservaRepository;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.ReservaService;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
-public class ReservaServiceIntegrationTest extends ReservaDados {
+class ReservaServiceIntegrationTest extends ReservaDados {
 
     @Autowired
     private ReservaRepository reservaRepository;
@@ -78,13 +79,9 @@ public class ReservaServiceIntegrationTest extends ReservaDados {
 
     @Test
     void deveLancarExceptionAoBuscarReservaPeloIdNaoEncontrado() {
-        var restauranteId = 1L;
-        var reserva = criarReservaDto();
-        reserva.setId(0L);
+        var reservaId = 0L;
 
-        var reservaRealizada = reservaService.reservarMesa(restauranteId, reserva);
-
-        assertThatThrownBy(() -> reservaService.findById(reserva.getId()))
+        assertThatThrownBy(() -> reservaService.findById(reservaId))
                 .isInstanceOf(EntityNotFoundException.class)
                 .hasMessage("Reserva não encontrada!");
     }
@@ -108,7 +105,7 @@ public class ReservaServiceIntegrationTest extends ReservaDados {
 
 
             assertThatThrownBy(() -> reservaService.reservarMesa(restauranteId, reservaDTO))
-                    .isInstanceOf(IllegalArgumentException.class)
+                    .isInstanceOf(NaoHaMesasDisponiveisException.class)
                     .hasMessage("Não há lugares disponíveis nesse horário para o Restaurante: Restaurante Teste");
 
 
@@ -124,7 +121,7 @@ public class ReservaServiceIntegrationTest extends ReservaDados {
         reservaDTO.setDataHoraFim(LocalDateTime.now().plusHours(2));
 
             assertThatThrownBy(() -> reservaService.reservarMesa(restauranteId, reservaDTO))
-                    .isInstanceOf(IllegalArgumentException.class)
+                    .isInstanceOf(NaoHaMesasDisponiveisException.class)
                     .hasMessage("Não há lugares disponíveis nesse horário para o Restaurante: Restaurante Teste");
 
 
