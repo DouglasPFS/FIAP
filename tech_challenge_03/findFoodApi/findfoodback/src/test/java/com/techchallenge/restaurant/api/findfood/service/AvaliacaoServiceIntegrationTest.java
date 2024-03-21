@@ -2,7 +2,7 @@ package com.techchallenge.restaurant.api.findfood.service;
 
 import com.techchallenge.restaurant.api.findfood.domain.repository.AvaliacaoRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
-import com.techchallenge.restaurant.api.findfood.dados.AvaliacaoServiceDados;
+import com.techchallenge.restaurant.api.findfood.dados.AvaliacaoDados;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -11,13 +11,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
+@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+class AvaliacaoServiceIntegrationTest extends AvaliacaoDados {
 
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
@@ -72,7 +73,6 @@ class AvaliacaoServiceIntegrationTest extends AvaliacaoServiceDados {
             var avaliacaoDTO = criarAvaliacaoDto();
             avaliacaoDTO.setPontuacao(-1);
 
-            assertThrows(IllegalArgumentException.class, () -> avaliacaoService.registrarAvaliacao(restauranteId, avaliacaoDTO));
             assertThatThrownBy(() -> avaliacaoService.registrarAvaliacao(restauranteId, avaliacaoDTO))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("Pontuação para a reserva precisa ser um valor de 0 a 5");

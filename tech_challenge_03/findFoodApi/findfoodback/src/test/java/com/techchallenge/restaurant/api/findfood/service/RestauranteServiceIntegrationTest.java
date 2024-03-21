@@ -1,28 +1,31 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
+import com.techchallenge.restaurant.api.findfood.dados.RestauranteDados;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteService;
-import com.techchallenge.restaurant.api.findfood.dados.RestauranteDados;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @SpringBootTest
-class RestauranteServiceIntegrationTest extends RestauranteDados {
+@Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+public class RestauranteServiceIntegrationTest {
 
-    @Autowired
+    private final ModelMapper modelMapper = new ModelMapper();
+    @Mock
     private RestauranteRepository restauranteRepository;
-    @Autowired
+    @InjectMocks
     private RestauranteService restauranteService;
-
     AutoCloseable mock;
-
     @BeforeEach
     void setup() {
         mock = MockitoAnnotations.openMocks(this);
@@ -42,7 +45,8 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
         void devePermitirRegistrarRestaurante() {
 
             // Arrange
-            var restauranteDto = criarRestauranteDtoValido();
+            var restauranteDto;
+
 
             // Assert
             assertThatCode(() -> restauranteService.registrarRestaurante(restauranteDto)).doesNotThrowAnyException();

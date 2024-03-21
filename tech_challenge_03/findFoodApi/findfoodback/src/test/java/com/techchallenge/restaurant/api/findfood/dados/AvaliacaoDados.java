@@ -4,7 +4,7 @@ import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Avaliacao;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 
-public class AvaliacaoServiceDados {
+public class AvaliacaoDados {
 
     public Restaurante criarRestaurante(){
         return Restaurante.builder()
@@ -44,7 +44,7 @@ public class AvaliacaoServiceDados {
         return avaliacao;
     }
 
-    public Avaliacao criarAvaliacaoComPontuacaoInvalidaAbixo0(){
+    public Avaliacao criarAvaliacaoComPontuacaoInvalidaAbaixo0(){
         var avaliacao = criarAvaliacao();
         avaliacao.setPontuacao(-1);
         return avaliacao;

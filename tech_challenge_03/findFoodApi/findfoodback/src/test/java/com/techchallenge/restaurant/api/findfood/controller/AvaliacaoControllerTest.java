@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techchallenge.restaurant.api.findfood.api.controller.AvaliacaoController;
 import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.domain.service.AvaliacaoService;
-import com.techchallenge.restaurant.api.findfood.dados.AvaliacaoServiceDados;
+import com.techchallenge.restaurant.api.findfood.dados.AvaliacaoDados;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(AvaliacaoController.class)
 @AutoConfigureMockMvc
-class AvaliacaoControllerTest extends AvaliacaoServiceDados {
+class AvaliacaoControllerTest extends AvaliacaoDados {
 
     @Autowired
     private MockMvc mockMvc;
