@@ -45,7 +45,7 @@ public class RestauranteServiceIntegrationTest {
         void devePermitirRegistrarRestaurante() {
 
             // Arrange
-            var restauranteDto;
+            var restauranteDto = criarRestauranteDtoValido();
 
 
             // Assert
