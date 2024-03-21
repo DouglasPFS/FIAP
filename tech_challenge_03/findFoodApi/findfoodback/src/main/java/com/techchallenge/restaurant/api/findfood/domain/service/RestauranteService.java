@@ -54,7 +54,6 @@ public class RestauranteService {
     }
     public List<Restaurante> buscarTodosRestaurantes() {
         List<Restaurante> restaurantes = restauranteRepository.findAll();
-        restauranteRepository.findAll();
         return restaurantes;
     }
     public RestauranteDTO atualizarRestaurante(Long restauranteId, RestauranteDTO restauranteDTO) {

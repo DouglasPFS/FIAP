@@ -345,7 +345,7 @@ class RestauranteServiceTest extends RestauranteDados {
         @Order(9)
         void deveLancarExcecaoAoBuscarTodosRestaurantes() {
             restauranteService.buscarTodosRestaurantes();
-            verify(restauranteRepository, times(1)).findAll();
+            verify(restauranteRepository, times(2)).findAll();
         }
     }
 

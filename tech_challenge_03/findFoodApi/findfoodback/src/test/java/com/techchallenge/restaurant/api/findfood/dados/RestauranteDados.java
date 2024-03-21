@@ -6,7 +6,7 @@ import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 
 public class RestauranteDados {
 
-    public RestauranteDTO criarRestauranteDtoValido() {
+    public static RestauranteDTO criarRestauranteDtoValido() {
         return RestauranteDTO.builder()
             .nome("Restaurante Teste")
             .localizacao("São Paulo, SP")

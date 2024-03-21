@@ -16,7 +16,7 @@ public class RestauranteController {
 
     private final RestauranteService service;
 
-    @PostMapping
+    @PostMapping("/registrarRestaurante")
     public ResponseEntity<String> save(@RequestBody RestauranteDTO restauranteDTO) {
         service.registrarRestaurante(restauranteDTO);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body("Restaurante Registrado com Sucesso");
@@ -30,7 +30,7 @@ public class RestauranteController {
         return ResponseEntity.ok(restaurante);
     }
 
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Restaurante>> findAll() {
         var restaurantes = service.buscarTodosRestaurantes();
         if(restaurantes.isEmpty()){
@@ -40,13 +40,13 @@ public class RestauranteController {
         }
     }
 
-    @PutMapping("/{restauranteId}")
+    @PutMapping("/atualizar/{restauranteId}")
     public ResponseEntity<RestauranteDTO> update(@PathVariable Long restauranteId, @RequestBody RestauranteDTO restauranteDTO) {
         restauranteDTO = service.atualizarRestaurante(restauranteId, restauranteDTO);
         return ResponseEntity.ok(restauranteDTO);
     }
 
-    @DeleteMapping("/{restauranteId}")
+    @DeleteMapping("/deletar/{restauranteId}")
     public ResponseEntity<Void> delete(@PathVariable Long restauranteId) {
         service.deletarRestaurante(restauranteId);
         return ResponseEntity.noContent().build();
