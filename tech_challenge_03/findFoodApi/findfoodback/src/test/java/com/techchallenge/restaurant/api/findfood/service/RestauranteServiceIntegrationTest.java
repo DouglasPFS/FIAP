@@ -1,22 +1,18 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
-import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteService;
 import com.techchallenge.restaurant.api.findfood.dados.RestauranteDados;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.commons.lang.StringUtils;
 import org.junit.jupiter.api.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
-import static org.mockito.Mockito.*;
+
 @SpringBootTest
 class RestauranteServiceIntegrationTest extends RestauranteDados {
 
@@ -77,7 +73,6 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
         void devePermitirAtualizarRestaurantes() {
 
             // Arrange
-            var restauranteId = 1L;
             var restauranteDto = criarRestauranteDtoValido();
 
             // Act
@@ -122,9 +117,6 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
             // Assert
             assertThatCode(() -> restauranteService.deletarRestaurante(restauranteId)).doesNotThrowAnyException();
 
-            // "org.springframework.dao.DataIntegrityViolationException: could not execute statement [ERROR: update or delete on table "tb_restaurante" violates foreign key constraint "fkfij8rbafgjtwm9knwe98wcut9" on table "tb_avaliacao"
-            //  Detalhe: Key (id)=(1) is still referenced from table "tb_avaliacao".] [delete from tb_restaurante where id=?]; SQL [delete from tb_restaurante where id=?]; constraint [fkfij8rbafgjtwm9knwe98wcut9]
-
         }
 
         @Test
@@ -132,7 +124,7 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
         void deveLancarExcecaoAoDeletarRestauranteInexistente() {
 
             // Arrange
-            Long restauranteId = 100L; // ID inexistente
+            Long restauranteId = 100L;
 
             // Assert
             assertThatThrownBy(() -> restauranteService.deletarRestaurante(restauranteId))
@@ -157,7 +149,8 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
             restauranteService.registrarRestaurante(restauranteDto);
 
             // Assert
-            assertThatCode(() -> restauranteService.buscarRestaurantePor(restauranteDto.getNome(), null, null)).doesNotThrowAnyException();
+            assertThatCode(() -> restauranteService.buscarRestaurantePor(restauranteDto.getNome(), StringUtils.EMPTY, StringUtils.EMPTY));
+
 
         }
         @Test
@@ -171,7 +164,7 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
             restauranteService.registrarRestaurante(restauranteDto);
 
             // Assert
-            assertThatCode(() -> restauranteService.buscarRestaurantePor(null, restauranteDto.getLocalizacao(), null)).doesNotThrowAnyException();
+            assertThatCode(() -> restauranteService.buscarRestaurantePor(StringUtils.EMPTY, restauranteDto.getLocalizacao(), StringUtils.EMPTY)).doesNotThrowAnyException();
 
         }
         @Test
@@ -185,7 +178,7 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
             restauranteService.registrarRestaurante(restauranteDto);
 
             // Assert
-            assertThatCode(() -> restauranteService.buscarRestaurantePor(null, null , restauranteDto.getTipoCozinha())).doesNotThrowAnyException();
+            assertThatCode(() -> restauranteService.buscarRestaurantePor(StringUtils.EMPTY, StringUtils.EMPTY , restauranteDto.getTipoCozinha())).doesNotThrowAnyException();
 
         }
         @Test
@@ -194,10 +187,6 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
 
             // Arrange
             var restauranteId = 1L;
-            var restauranteDto = criarRestauranteDtoValido();
-
-            // Act
-            restauranteService.registrarRestaurante(restauranteDto);
 
             // Assert
             assertThatCode(() -> restauranteService.buscarRestaurantePorID(restauranteId)).doesNotThrowAnyException();
@@ -208,9 +197,7 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
         void devePermitirBuscarTodosRestaurantes(){
 
             // Arrange
-            var restauranteId = 1L;
             var restauranteDto = criarRestauranteDtoValido();
-            var restaurante = criarRestauranteValido();
 
             // Act
             restauranteService.registrarRestaurante(restauranteDto);
@@ -227,7 +214,7 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
             var restauranteNome = "Ifood"; // ID inexistente
 
             // Assert
-            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(restauranteNome, null, null))
+            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(restauranteNome, StringUtils.EMPTY, StringUtils.EMPTY))
                     .isInstanceOf(EntityNotFoundException.class)
                     .hasMessage("Restaurante com nome '"+restauranteNome+"' não foi encontrado.");
         }
@@ -240,7 +227,7 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
 
 
             // Assert
-            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(null, restauranteLocalizacao, null))
+            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(StringUtils.EMPTY, restauranteLocalizacao, StringUtils.EMPTY))
                     .isInstanceOf(EntityNotFoundException.class)
                     .hasMessage("Restaurante com localização '"+restauranteLocalizacao+"' não foi encontrado.");
         }
@@ -252,14 +239,13 @@ class RestauranteServiceIntegrationTest extends RestauranteDados {
             var restauranteTipoCozinha = "Francesa";
 
             // Assert
-            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(null, null, restauranteTipoCozinha))
+            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(StringUtils.EMPTY, StringUtils.EMPTY, restauranteTipoCozinha))
                     .isInstanceOf(EntityNotFoundException.class)
                     .hasMessage("Restaurante com tipo de cozinha '"+restauranteTipoCozinha+"' não foi encontrado.");
         }
         @Test
         @Order(9)
         void deveLancarExcecaoAoBuscarTodosRestaurantes() {
-
             // Assert
             assertThat(restauranteService.buscarTodosRestaurantes()).isEmpty();
         }

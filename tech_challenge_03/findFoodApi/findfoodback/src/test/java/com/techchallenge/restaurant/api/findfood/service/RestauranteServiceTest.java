@@ -344,15 +344,8 @@ class RestauranteServiceTest extends RestauranteDados {
         @Test
         @Order(9)
         void deveLancarExcecaoAoBuscarTodosRestaurantes() {
-
-            try {
-                // Act
-                restauranteService.buscarTodosRestaurantes();
-            } catch (Exception e) {
-                // Assert
-                verify(restauranteRepository, times(1)).findAll();
-                assertThat(e.getMessage()).contains("Nenhum Restaurante Encontrado");
-            }
+            restauranteService.buscarTodosRestaurantes();
+            verify(restauranteRepository, times(1)).findAll();
         }
     }
 

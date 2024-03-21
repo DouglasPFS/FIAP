@@ -54,12 +54,8 @@ public class RestauranteService {
     }
     public List<Restaurante> buscarTodosRestaurantes() {
         List<Restaurante> restaurantes = restauranteRepository.findAll();
-        if (!restaurantes.isEmpty()) {
-            restauranteRepository.findAll();
-            return restaurantes;
-        }else {
-            throw new EntityNotFoundException("Nenhum Restaurante Encontrado");
-        }
+        restauranteRepository.findAll();
+        return restaurantes;
     }
     public RestauranteDTO atualizarRestaurante(Long restauranteId, RestauranteDTO restauranteDTO) {
 

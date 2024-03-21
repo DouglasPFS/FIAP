@@ -33,7 +33,11 @@ public class RestauranteController {
     @GetMapping
     public ResponseEntity<List<Restaurante>> findAll() {
         var restaurantes = service.buscarTodosRestaurantes();
-        return ResponseEntity.ok(restaurantes);
+        if(restaurantes.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.ok(restaurantes);
+        }
     }
 
     @PutMapping("/{restauranteId}")
