@@ -267,7 +267,7 @@ class RestauranteServiceTest extends RestauranteDados {
             restauranteService.buscarTodosRestaurantes();
 
             // Assert
-            verify(restauranteRepository, times(2)).findAll();
+            verify(restauranteRepository, times(1)).findAll();
         }
         @Test
         @Order(6)
