@@ -23,7 +23,7 @@ public class RestauranteService {
             var restaurante = modelMapper.map(restauranteDTO, Restaurante.class);
             restauranteRepository.save(restaurante);
         }else{
-            throw new IllegalArgumentException(String.format("Inconsistencia nos campos informados."));
+            throw new IllegalArgumentException("Inconsistencia nos campos informados.");
         }
     }
 
@@ -54,7 +54,11 @@ public class RestauranteService {
     }
     public List<Restaurante> buscarTodosRestaurantes() {
         List<Restaurante> restaurantes = restauranteRepository.findAll();
-        return restaurantes;
+        if(restaurantes.isEmpty()) {
+            throw new EntityNotFoundException("Nenhum Restaurante Cadastrado");
+        }else{
+            return restaurantes;
+        }
     }
     public RestauranteDTO atualizarRestaurante(Long restauranteId, RestauranteDTO restauranteDTO) {
 

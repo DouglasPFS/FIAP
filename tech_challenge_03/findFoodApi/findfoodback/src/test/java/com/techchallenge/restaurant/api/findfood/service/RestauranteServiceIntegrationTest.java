@@ -4,6 +4,7 @@ import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRe
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteService;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +109,7 @@ public class RestauranteServiceIntegrationTest {
     class deletarRestaurante {
         @Test
         @Order(1)
+        @Sql(scripts = "/delete.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD) // Executa um script SQL para limpar as tabelas antes do método de teste
         void devePermitirDeletarRestaurantes() {
 
             // Arrange
@@ -249,11 +251,15 @@ public class RestauranteServiceIntegrationTest {
                     .isInstanceOf(EntityNotFoundException.class)
                     .hasMessage("Restaurante com tipo de cozinha '"+restauranteTipoCozinha+"' não foi encontrado.");
         }
-/*        @Test
+        @Test
         @Order(9)
+        @Sql(scripts = "/cleanup.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
         void deveLancarExcecaoAoBuscarTodosRestaurantes() {
+
             // Assert
-            assertThat(restauranteService.buscarTodosRestaurantes()).isEmpty();
-        }*/
+            Assertions.assertThatThrownBy(() -> restauranteService.buscarTodosRestaurantes())
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Nenhum Restaurante Cadastrado");
+        }
     }
 }

@@ -27,14 +27,18 @@ public class RestauranteController {
                                                               @RequestParam(name = "localizacao", required = false, defaultValue = "") String localizacao,
                                                               @RequestParam(name = "tipoCozinha", required = false, defaultValue = "") String tipoCozinha) {
         var restaurante = service.buscarRestaurantePor(nome, localizacao, tipoCozinha);
-        return ResponseEntity.ok(restaurante);
+        if(restaurante.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else {
+            return ResponseEntity.ok(restaurante);
+        }
     }
 
     @GetMapping("/todos")
     public ResponseEntity<List<Restaurante>> findAll() {
         var restaurantes = service.buscarTodosRestaurantes();
         if(restaurantes.isEmpty()){
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.notFound().build();
         }else {
             return ResponseEntity.ok(restaurantes);
         }
@@ -47,8 +51,8 @@ public class RestauranteController {
     }
 
     @DeleteMapping("/deletar/{restauranteId}")
-    public ResponseEntity<Void> delete(@PathVariable Long restauranteId) {
+    public ResponseEntity<String> delete(@PathVariable Long restauranteId) {
         service.deletarRestaurante(restauranteId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body("Restaurante Deletado com Sucesso");
     }
 }

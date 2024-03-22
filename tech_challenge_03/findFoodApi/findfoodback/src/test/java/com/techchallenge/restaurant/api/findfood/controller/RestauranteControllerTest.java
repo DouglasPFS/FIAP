@@ -105,7 +105,7 @@ public class RestauranteControllerTest {
 
             // Act & Assert
             mockMvc.perform(delete("/api/restaurantes/deletar/{restauranteId}", restauranteId))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
                 verify(restauranteService, times(1)).deletarRestaurante(anyLong());
         }
     }

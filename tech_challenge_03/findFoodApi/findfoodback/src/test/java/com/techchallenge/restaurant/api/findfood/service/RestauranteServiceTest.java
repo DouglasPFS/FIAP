@@ -6,12 +6,14 @@ import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRe
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteService;
 import com.techchallenge.restaurant.api.findfood.dados.RestauranteDados;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -69,14 +72,11 @@ class RestauranteServiceTest extends RestauranteDados {
             restauranteDto.setNome("");
             when(modelMapper.map(restauranteDto, Restaurante.class)).thenReturn(criarRestauranteValido());
 
-            try {
-                //Act
-                restauranteService.registrarRestaurante(restauranteDto);
-            } catch (Exception e) {
-                // Assert
-                assertThat(e).isInstanceOf(IllegalArgumentException.class);
-                assertThat(e.getMessage()).contains("Inconsistencia nos campos informados.");
-            }
+            //Act & Assert
+            assertThatThrownBy(() -> restauranteService.registrarRestaurante(restauranteDto))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Inconsistencia nos campos informados.");
+
         }
     }
     @Nested
@@ -112,14 +112,11 @@ class RestauranteServiceTest extends RestauranteDados {
             var restauranteId = 1L;
             var restauranteDto = criarRestauranteDtoValido();
 
-            // Act
-            try {
-                restauranteService.atualizarRestaurante(restauranteId, restauranteDto);
-            } catch (Exception e) {
-                // Assert
-                assertThat(e).isInstanceOf(EntityNotFoundException.class);
-                assertThat(e.getMessage()).contains("Restaurante não foi encontrado");
-            }
+            //Act & Assert
+            assertThatThrownBy(() -> restauranteService.atualizarRestaurante(restauranteId, restauranteDto))
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Restaurante não foi encontrado");
+
         }
     }
     @Nested
@@ -152,14 +149,11 @@ class RestauranteServiceTest extends RestauranteDados {
             // Arrange
             Long restauranteId = 100L; // ID inexistente
 
-            // Act
-            try {
-                restauranteService.deletarRestaurante(restauranteId);
-            } catch (Exception e) { // Adjust the exception type if necessary
-                // Assert
-                assertThat(e).isInstanceOf(EntityNotFoundException.class);
-                assertThat(e.getMessage()).contains("Restaurante com ID '100' não foi encontrado para exclusão.");
-            }
+            //Act & Assert
+            assertThatThrownBy(() -> restauranteService.deletarRestaurante(restauranteId))
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Restaurante com ID '100' não foi encontrado para exclusão.");
+
         }
     }
     @Nested
@@ -282,16 +276,10 @@ class RestauranteServiceTest extends RestauranteDados {
             when(modelMapper.map(restauranteDto, Restaurante.class)).thenReturn(restaurante);
             when(restauranteRepository.findByNomeLocalizacaoTipoCozinha(eq(restauranteDto.getNome()), any(), any())).thenReturn(Collections.singletonList(restaurante));
 
-            try {
-                // Act
-                restauranteService.registrarRestaurante(restauranteDto);
-                List<Restaurante> actualRestaurants = restauranteService.buscarRestaurantePor(restauranteNome, null, null);
-            } catch (EntityNotFoundException e) {
-                // Assert
-                assertThat(e.getMessage()).contains("Restaurante com nome '"+restauranteNome+"' não foi encontrado.");
-                verify(restauranteRepository, times(1)).save(any());
-                verify(restauranteRepository, times(1)).findByNomeLocalizacaoTipoCozinha(any(), any(), any());
-            }
+            //Act & Assert
+            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(restauranteNome, StringUtils.EMPTY, StringUtils.EMPTY))
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Restaurante com nome '"+restauranteNome+"' não foi encontrado.");
         }
         @Test
         @Order(7)
@@ -306,16 +294,10 @@ class RestauranteServiceTest extends RestauranteDados {
             when(modelMapper.map(restauranteDto, Restaurante.class)).thenReturn(restaurante);
             when(restauranteRepository.findByNomeLocalizacaoTipoCozinha(any(), eq(restauranteDto.getLocalizacao()), any())).thenReturn(Collections.singletonList(restaurante));
 
-            try {
-                // Act
-                restauranteService.registrarRestaurante(restauranteDto);
-                List<Restaurante> actualRestaurants = restauranteService.buscarRestaurantePor(null, restauranteLocalizacao, null);
-            } catch (EntityNotFoundException e) {
-                // Assert
-                assertThat(e.getMessage()).contains("Restaurante com localização '"+restauranteLocalizacao+"' não foi encontrado.");
-                verify(restauranteRepository, times(1)).save(any());
-                verify(restauranteRepository, times(1)).findByNomeLocalizacaoTipoCozinha(any(), any(), any());
-            }
+            //Act & Assert
+            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(StringUtils.EMPTY, restauranteLocalizacao, StringUtils.EMPTY))
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Restaurante com localização '"+restauranteLocalizacao+"' não foi encontrado.");
         }
         @Test
         @Order(8)
@@ -330,22 +312,19 @@ class RestauranteServiceTest extends RestauranteDados {
             when(modelMapper.map(restauranteDto, Restaurante.class)).thenReturn(restaurante);
             when(restauranteRepository.findByNomeLocalizacaoTipoCozinha(any(), any(), eq(restauranteDto.getTipoCozinha()))).thenReturn(Collections.singletonList(restaurante));
 
-            try {
-                // Act
-                restauranteService.registrarRestaurante(restauranteDto);
-                List<Restaurante> actualRestaurants = restauranteService.buscarRestaurantePor(null, null, restauranteTipoCozinha);
-            } catch (EntityNotFoundException e) {
-                // Assert
-                assertThat(e.getMessage()).contains("Restaurante com tipo de cozinha '"+restauranteTipoCozinha+"' não foi encontrado.");
-                verify(restauranteRepository, times(1)).save(any());
-                verify(restauranteRepository, times(1)).findByNomeLocalizacaoTipoCozinha(any(), any(), any());
-            }
+            //Act & Assert
+            assertThatThrownBy(() -> restauranteService.buscarRestaurantePor(StringUtils.EMPTY, StringUtils.EMPTY, restauranteTipoCozinha))
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Restaurante com tipo de cozinha '"+restauranteTipoCozinha+"' não foi encontrado.");
         }
         @Test
         @Order(9)
         void deveLancarExcecaoAoBuscarTodosRestaurantes() {
-            restauranteService.buscarTodosRestaurantes();
-            verify(restauranteRepository, times(2)).findAll();
+
+            assertThatThrownBy(() -> restauranteService.buscarTodosRestaurantes())
+                    .isInstanceOf(EntityNotFoundException.class)
+                    .hasMessage("Nenhum Restaurante Cadastrado");
+
         }
     }
 
