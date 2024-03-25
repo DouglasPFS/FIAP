@@ -38,7 +38,7 @@ public class ReservaController {
     @DeleteMapping("/reserva/{reservaId}")
     public ResponseEntity<String> excluirReserva(@PathVariable Long reservaId) {
         service.delete(reservaId);
-        return ResponseEntity.ok().body("Reserva excluída com sucesso");
+        return ResponseEntity.noContent().build();
     }
 
 }

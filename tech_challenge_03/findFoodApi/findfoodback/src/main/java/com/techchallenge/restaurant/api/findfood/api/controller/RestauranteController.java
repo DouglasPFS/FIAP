@@ -51,8 +51,13 @@ public class RestauranteController {
     }
 
     @DeleteMapping("/deletar/{restauranteId}")
-    public ResponseEntity<String> delete(@PathVariable Long restauranteId) {
-        service.deletarRestaurante(restauranteId);
-        return ResponseEntity.status(HttpStatusCode.valueOf(200)).body("Restaurante Deletado com Sucesso");
+    public ResponseEntity<Void> delete(@PathVariable Long restauranteId) {
+        try {
+            service.deletarRestaurante(restauranteId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            // Logar a exceção e retornar um código de erro genérico (ex: 500)
+            return ResponseEntity.notFound().build();
+        }
     }
 }

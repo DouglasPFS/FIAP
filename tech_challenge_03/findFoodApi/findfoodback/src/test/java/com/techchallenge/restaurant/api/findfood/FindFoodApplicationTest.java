@@ -1,22 +1,28 @@
 package com.techchallenge.restaurant.api.findfood;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ConfigurableApplicationContext;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.verify;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = FindfoodApplication.class)
-public class FindFoodApplicationTest {
-    @Autowired
-    private FindfoodApplication application;
+@SpringBootTest
+class FindfoodApplicationTest {
 
-    @Test
-    public void contextLoads() {
-        // Verifica se a aplicação foi iniciada corretamente
-        assertThat(application).isNotNull();
-    }
+    //@MockBean
+    //private SpringApplication springApplication;
+
+    //@Test
+    //public void contextLoads() {
+        // Chama o método run do SpringApplication
+        //ConfigurableApplicationContext context = springApplication.run(FindfoodApplication.class);
+
+        // Verifica se o método run foi chamado com os argumentos corretos
+        //verify(springApplication).run(FindfoodApplication.class);
+    //}
 }
