@@ -1,3 +1,15 @@
 
-e
-java:S2187"Add some tests to this class.(„ÜÒÍúÿÿÿÿ8¯””™ç1J$80e74adf-dd13-490d-af15-7040471b3b59
+a
+java:S5786"Remove this 'public' modifier.(¾ôØ8Æ¿âêç1J$b4d8d741-7a5c-4285-9f65-c59ee6ed13a9
+f
+java:S5786)"Remove this 'public' modifier.(‡œƒŞşÿÿÿÿ8Æ¿âêç1J$d7310185-798c-4f69-bd89-e734e223f4e7
+a
+java:S57860"Remove this 'public' modifier.(ô³†¶8Æ¿âêç1J$0f135cab-a084-4cd8-8247-4b0f539a6552
+f
+java:S5786;"Remove this 'public' modifier.(ô”¦şÿÿÿÿ8ƒÏ›ëç1J$de841829-e84d-4de8-a59a-f1bf305d75ca
+¥
+java:S5778*"bRefactor the code of the lambda to have only one invocation possibly throwing a runtime exception.(¶İ÷“8É¿âêç1J$b182c7cd-5076-49b1-ad83-eee215cf8e07
+¥
+java:S57783"bRefactor the code of the lambda to have only one invocation possibly throwing a runtime exception.(¶İ÷“8Ê¿âêç1J$36619bdf-ddf4-4f4b-acf0-4c8a863b7111
+¥
+java:S5778?"bRefactor the code of the lambda to have only one invocation possibly throwing a runtime exception.(¶İ÷“8Ê¿âêç1J$f8cff598-c47d-4844-91f1-c5f01911d242
