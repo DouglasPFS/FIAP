@@ -2,7 +2,6 @@ package com.techchallenge.restaurant.api.findfood.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techchallenge.restaurant.api.findfood.api.controller.RestauranteController;
-import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
@@ -19,8 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-
 import static com.techchallenge.restaurant.api.findfood.dados.ReservaDados.criarRestauranteValido;
 import static com.techchallenge.restaurant.api.findfood.dados.RestauranteDados.criarRestauranteDtoValido;
 import static org.mockito.ArgumentMatchers.any;
@@ -49,6 +46,8 @@ public class RestauranteControllerTest {
     @DisplayName("Testes de Registro de Restaurante")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class registrarRestaurante {
+        
+        @SuppressWarnings("null")
         @Test
         @Order(1)
         void devePermitirRegistrarRestaurante() throws Exception {
@@ -73,6 +72,8 @@ public class RestauranteControllerTest {
     @DisplayName("Testes de Atualização de Restaurante")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class atualizarRestaurante {
+        
+        @SuppressWarnings({ "unused", "null" })
         @Test
         @Order(1)
         void devePermitirAtualizarRestaurantes() throws Exception {
@@ -147,5 +148,6 @@ public class RestauranteControllerTest {
                 verify(restauranteService, times(1)).buscarTodosRestaurantes();
 
         }
+
     }
 }

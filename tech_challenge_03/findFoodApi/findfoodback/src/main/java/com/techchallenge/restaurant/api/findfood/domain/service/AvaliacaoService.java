@@ -20,6 +20,7 @@ public class AvaliacaoService {
 
     private final ModelMapper modelMapper;
 
+    @SuppressWarnings("null")
     public void registrarAvaliacao(Long restauranteId, AvaliacaoDTO avaliacaoDTO) {
         var optionalRestaurante = restauranteRepository.findById(restauranteId);
         var avaliacao = modelMapper.map(avaliacaoDTO, Avaliacao.class);
@@ -36,7 +37,7 @@ public class AvaliacaoService {
         avaliacaoRepository.save(avaliacao);
     }
 
-
+    @SuppressWarnings("null")
     public List<AvaliacaoDTO> findAll(Long restauranteId) {
         var optionalRestaurante = restauranteRepository.findById(restauranteId);
 

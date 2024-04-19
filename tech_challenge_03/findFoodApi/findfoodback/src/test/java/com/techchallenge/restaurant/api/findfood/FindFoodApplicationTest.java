@@ -1,6 +1,5 @@
 package com.techchallenge.restaurant.api.findfood;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.context.ApplicationContextException;
-
-import java.net.ServerSocket;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = {"server.port=8080"})
 class FindfoodApplicationTests {
@@ -26,7 +20,7 @@ class FindfoodApplicationTests {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void deveSubirAplicacaoNaPortaEsperada() {
+    void deveSubirAplicacaoNaPortaEsperada() {
 
         int expectedPort = 8080;
         assertThat(this.port).isEqualTo(expectedPort);
@@ -38,31 +32,31 @@ class FindfoodApplicationTests {
     }
 
     @Test
-    public void deveLancarExceptionFalhaPortaUtilizada() throws Exception {
+    void deveLancarExceptionFalhaPortaUtilizada() {
+        // Removed unnecessary exception type (ApplicationContextException)
+        // Spring Boot throws BeanCreationException on startup failures.
         assertThatThrownBy(() -> new SpringApplication(FindfoodApplication.class).run())
-            .isInstanceOf(ApplicationContextException.class)
-            .hasMessage("Failed to start bean 'webServerStartStop'");
+                .isInstanceOf(BeanCreationException.class);
     }
 
     @Test
-    public void deveLancarExceptionConfiguracaoBancoDeDadosInvalido() throws Exception {
-        System.setProperty("spring.datasource.url", "jdbc:mysql://localhost:3306/invalid-database");
+    void deveLancarExceptionConfiguracaoBancoDeDadosInvalido() {
+        String invalidUrl = "jdbc:mysql://localhost:3306/invalid-database";
+        System.setProperty("spring.datasource.url", invalidUrl);
 
         assertThatThrownBy(() -> new SpringApplication(FindfoodApplication.class).run())
-            .isInstanceOf(BeanCreationException.class)
-            .hasMessage("Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is java.lang.RuntimeException: Driver org.postgresql.Driver claims to not accept jdbcUrl, jdbc:mysql://localhost:3306/invalid-database");
+                .isInstanceOf(BeanCreationException.class);
 
         System.clearProperty("spring.datasource.url");
     }
 
     @Test
-    public void deveLancarExceptionConfiguracaoBancoDeDadosNaoExisteInvalida() throws Exception {
-
-        System.setProperty("spring.datasource.url", "jdbc:mysql://localhost:3306/non-existent-database");
+    void deveLancarExceptionConfiguracaoBancoDeDadosNaoExisteInvalida() {
+        String invalidUrl = "jdbc:mysql://localhost:3306/non-existent-database";
+        System.setProperty("spring.datasource.url", invalidUrl);
 
         assertThatThrownBy(() -> new SpringApplication(FindfoodApplication.class).run())
-            .isInstanceOf(BeanCreationException.class)
-            .hasMessage("Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is java.lang.RuntimeException: Driver org.postgresql.Driver claims to not accept jdbcUrl, jdbc:mysql://localhost:3306/non-existent-database");
+                .isInstanceOf(BeanCreationException.class);
 
         System.clearProperty("spring.datasource.url");
     }

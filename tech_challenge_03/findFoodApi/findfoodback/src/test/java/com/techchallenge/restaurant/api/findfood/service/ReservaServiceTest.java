@@ -40,6 +40,7 @@ class ReservaServiceTest extends ReservaDados {
     }
 
 
+    @SuppressWarnings("null")
     @Test
     void deveReservarMesaComRestauranteComSucesso() {
         var restauranteId = 1L;
@@ -55,6 +56,7 @@ class ReservaServiceTest extends ReservaDados {
 
     }
 
+    @SuppressWarnings("null")
     @Test
     void deveLancarExceptionAoTentarReservarMesaComRestauranteNaoEncontrado() {
         var restauranteId = 1L;
@@ -105,6 +107,7 @@ class ReservaServiceTest extends ReservaDados {
 
     }
 
+    @SuppressWarnings("unused")
     @Test
     void deveBuscarReservaPeloIdComSucesso() {
         Long reservaId = 1L;

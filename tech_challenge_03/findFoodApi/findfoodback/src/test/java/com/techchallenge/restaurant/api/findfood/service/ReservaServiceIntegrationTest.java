@@ -20,12 +20,12 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 class ReservaServiceIntegrationTest extends ReservaDados {
 
+    @SuppressWarnings("unused")
     @Autowired
     private ReservaRepository reservaRepository;
 
@@ -35,6 +35,7 @@ class ReservaServiceIntegrationTest extends ReservaDados {
     @Autowired
     private ReservaService reservaService;
 
+    @SuppressWarnings("unused")
     private ModelMapper modelMapper = new ModelMapper();
 
     @BeforeEach
@@ -45,6 +46,7 @@ class ReservaServiceIntegrationTest extends ReservaDados {
     }
 
 
+    @SuppressWarnings("null")
     @Test
     void deveReservarComSucesso() {
         var restaurante = criarRestauranteValido();
@@ -129,6 +131,7 @@ class ReservaServiceIntegrationTest extends ReservaDados {
 
     }
 
+    @SuppressWarnings("unused")
     @Test
     @Order(2)
     void deveRetornarTodasAsReservasComSucesso() {

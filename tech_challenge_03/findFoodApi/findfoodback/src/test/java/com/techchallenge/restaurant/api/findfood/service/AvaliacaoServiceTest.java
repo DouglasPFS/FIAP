@@ -43,6 +43,8 @@ class AvaliacaoServiceTest extends AvaliacaoDados {
     @Nested
 
     class registrarAvaliacao {
+        
+        @SuppressWarnings("null")
         @Test
         void deveRegistrarAvaliacaoComSucesso() {
             var restauranteId = 1L;
@@ -61,6 +63,7 @@ class AvaliacaoServiceTest extends AvaliacaoDados {
             verify(avaliacaoRepository, times(1)).save(any());
         }
 
+        @SuppressWarnings("null")
         @Test
         void deveLancarExceptionAoTentarRegistrarAvaliacaoComRestauranteNaoEncontrado() {
             var restauranteId = 1L;
@@ -73,6 +76,7 @@ class AvaliacaoServiceTest extends AvaliacaoDados {
             verify(avaliacaoRepository, never()).save(any());
         }
 
+        @SuppressWarnings("null")
         @Test
         void deveLancarExceptionAoTentarRegistrarAvaliacaoComPontuacaoAcimaDe5() {
             var restauranteId = 1L;
@@ -87,6 +91,7 @@ class AvaliacaoServiceTest extends AvaliacaoDados {
             verify(avaliacaoRepository, never()).save(any());
         }
 
+        @SuppressWarnings("null")
         @Test
         void deveLancarExceptionAoTentarRegistrarAvaliacaoComPontuacaoAbaixoDe0() {
             var restauranteId = 1L;

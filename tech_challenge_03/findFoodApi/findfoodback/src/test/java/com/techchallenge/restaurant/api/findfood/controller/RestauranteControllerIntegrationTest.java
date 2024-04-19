@@ -1,16 +1,13 @@
 package com.techchallenge.restaurant.api.findfood.controller;
 
-import com.techchallenge.restaurant.api.findfood.api.model.AvaliacaoDTO;
 import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import io.restassured.RestAssured;
-import io.restassured.mapper.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import static com.techchallenge.restaurant.api.findfood.dados.RestauranteDados.criarRestauranteDtoValido;
@@ -33,6 +30,8 @@ public class RestauranteControllerIntegrationTest {
     @DisplayName("Testes de Registro de Restaurante")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class registrarRestaurante {
+        
+        @SuppressWarnings("unused")
         @Test
         @Order(1)
         void devePermitirRegistrarRestaurante() {
@@ -56,6 +55,7 @@ public class RestauranteControllerIntegrationTest {
 
         }
 
+        @SuppressWarnings("unused")
         @Test
         @Order(2)
         void deveLancarExcecaoAoSalvarRestauranteComNomeVazio() {

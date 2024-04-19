@@ -35,6 +35,7 @@ class ReservaControllerTest extends ReservaDados {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @SuppressWarnings("null")
     @Test
     void deveReservarMesaComSucesso() throws Exception {
         Long restauranteId = 1L;
@@ -65,6 +66,7 @@ class ReservaControllerTest extends ReservaDados {
         verify(reservaService, times(1)).findAll(restauranteId);
     }
 
+    @SuppressWarnings("null")
     @Test
     void deveRetornarUmaReservaComSucesso() throws Exception {
         ReservaDTO reservaDTO = criarReservaDto();

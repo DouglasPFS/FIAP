@@ -22,6 +22,7 @@ public class ReservaService {
 
     private final ModelMapper modelMapper;
 
+    @SuppressWarnings("null")
     public ReservaDTO reservarMesa(Long restauranteId, ReservaDTO reservaDTO){
         var optionalRestaurante = restauranteRepository.findById(restauranteId);
         if (optionalRestaurante.isEmpty()) {
@@ -53,6 +54,7 @@ public class ReservaService {
         return qtdeTotalMesasLivres >= mesasNecesariasParaReserva;
     }
 
+    @SuppressWarnings("null")
     public Collection<ReservaDTO> findAll(Long restauranteId) {
         var optionalRestaurante = restauranteRepository.findById(restauranteId);
 
@@ -66,11 +68,13 @@ public class ReservaService {
                 .toList();
     }
 
+    @SuppressWarnings("null")
     public ReservaDTO findById(Long id) {
         var reserva = reservaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reserva não encontrada!"));
         return modelMapper.map(reserva, ReservaDTO.class);
     }
 
+    @SuppressWarnings("null")
     public void delete(Long id) {
         reservaRepository.deleteById(id);
     }

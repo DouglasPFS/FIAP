@@ -36,6 +36,7 @@ class AvaliacaoControllerTest extends AvaliacaoDados {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @SuppressWarnings("null")
     @Test
     void deveRegistrarAvaliacaoComSucesso() throws Exception {
         Long restauranteId = 1L;

@@ -18,6 +18,7 @@ public class RestauranteService {
     private final RestauranteRepository restauranteRepository;
     private final ModelMapper modelMapper;
 
+    @SuppressWarnings("null")
     public void registrarRestaurante(RestauranteDTO restauranteDTO) {
         if (isRestauranteDTOValid(restauranteDTO)) {
             var restaurante = modelMapper.map(restauranteDTO, Restaurante.class);
@@ -43,6 +44,8 @@ public class RestauranteService {
 
         return restaurantesEncontrados;
     }
+    
+    @SuppressWarnings("null")
     public Optional<Restaurante> buscarRestaurantePorID(Long id) {
         Optional<Restaurante> restauranteOptional = restauranteRepository.findById(id);
         if (restauranteOptional.isPresent()) {
@@ -60,6 +63,8 @@ public class RestauranteService {
             return restaurantes;
         }
     }
+
+    @SuppressWarnings("null")
     public RestauranteDTO atualizarRestaurante(Long restauranteId, RestauranteDTO restauranteDTO) {
 
         Optional<Restaurante> optionalRestaurante = restauranteRepository.findById(restauranteId);
@@ -75,6 +80,8 @@ public class RestauranteService {
             throw new EntityNotFoundException("Restaurante não foi encontrado");
         }
     }
+    
+    @SuppressWarnings("null")
     public void deletarRestaurante(Long id) {
         Optional<Restaurante> restauranteOptional = restauranteRepository.findById(id);
         if (restauranteOptional.isPresent()) {
@@ -84,7 +91,7 @@ public class RestauranteService {
         }
     }
 
-    private boolean isRestauranteDTOValid(RestauranteDTO dto) {
+    public boolean isRestauranteDTOValid(RestauranteDTO dto) {
         return dto.getNome() != null && !dto.getNome().isEmpty() &&
                 dto.getLocalizacao() != null && !dto.getLocalizacao().isEmpty() &&
                 dto.getTipoCozinha() != null && !dto.getTipoCozinha().isEmpty() &&

@@ -1,6 +1,5 @@
 package com.techchallenge.restaurant.api.findfood.service;
 
-import com.techchallenge.restaurant.api.findfood.api.model.RestauranteDTO;
 import com.techchallenge.restaurant.api.findfood.domain.model.Restaurante;
 import com.techchallenge.restaurant.api.findfood.domain.repository.RestauranteRepository;
 import com.techchallenge.restaurant.api.findfood.domain.service.RestauranteService;
@@ -12,15 +11,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.jdbc.Sql;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
@@ -48,6 +42,7 @@ class RestauranteServiceTest extends RestauranteDados {
     @DisplayName("Testes de Registro de Restaurante")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class registrarRestaurante{
+        @SuppressWarnings("null")
         @Test
         @Order(1)
         void devePermitirRegistrarRestaurante(){
@@ -63,8 +58,9 @@ class RestauranteServiceTest extends RestauranteDados {
             verify(restauranteRepository, times(1)).save(any());
             verifyNoMoreInteractions(restauranteRepository);
         }
+        
         @Test
-        @Order(2)
+        @Order(3)
         void deveLancarExcecaoAoSalvarRestauranteComNomeVazio() {
 
             // Arrange
@@ -78,11 +74,14 @@ class RestauranteServiceTest extends RestauranteDados {
                     .hasMessage("Inconsistencia nos campos informados.");
 
         }
+
     }
     @Nested
     @DisplayName("Testes de Atualização de Restaurante")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class atualizarRestaurante{
+        
+        @SuppressWarnings("null")
         @Test
         @Order(1)
         void devePermitirAtualizarRestaurantes(){
@@ -160,6 +159,8 @@ class RestauranteServiceTest extends RestauranteDados {
     @DisplayName("Testes de Busca de Restaurante")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class buscarRestaurante{
+        
+        @SuppressWarnings({ "null", "unused" })
         @Test
         @Order(1)
         void devePermitirBuscarRestaurantePorNome() {
@@ -181,6 +182,7 @@ class RestauranteServiceTest extends RestauranteDados {
             verify(restauranteRepository, times(1)).save(any());
             verify(restauranteRepository, times(1)).findByNomeLocalizacaoTipoCozinha(any(), any(), any());
         }
+        @SuppressWarnings({ "null", "unused" })
         @Test
         @Order(2)
         void devePermitirBuscarRestaurantePorLocalizacao(){
@@ -202,6 +204,7 @@ class RestauranteServiceTest extends RestauranteDados {
             verify(restauranteRepository, times(1)).save(any());
             verify(restauranteRepository, times(1)).findByNomeLocalizacaoTipoCozinha(any(), any(), any());
         }
+        @SuppressWarnings({ "unused", "null" })
         @Test
         @Order(3)
         void devePermitirBuscarRestaurantePorTipoCozinha(){
@@ -223,6 +226,8 @@ class RestauranteServiceTest extends RestauranteDados {
             verify(restauranteRepository, times(1)).save(any());
             verify(restauranteRepository, times(1)).findByNomeLocalizacaoTipoCozinha(any(), any(), any());
         }
+        
+        @SuppressWarnings({ "null", "unused" })
         @Test
         @Order(4)
         void devePermitirBuscarRestaurantesPorId(){
@@ -244,6 +249,7 @@ class RestauranteServiceTest extends RestauranteDados {
             verify(restauranteRepository, times(2)).findById(any());
 
         }
+        @SuppressWarnings("unused")
         @Test
         @Order(5)
         void devePermitirBuscarTodosRestaurantes(){
@@ -263,6 +269,8 @@ class RestauranteServiceTest extends RestauranteDados {
             // Assert
             verify(restauranteRepository, times(1)).findAll();
         }
+        
+        @SuppressWarnings("null")
         @Test
         @Order(6)
         void deveLancarExcecaoAoBuscarNomeRestauranteInexistente() {
@@ -281,6 +289,8 @@ class RestauranteServiceTest extends RestauranteDados {
                     .isInstanceOf(EntityNotFoundException.class)
                     .hasMessage("Restaurante com nome '"+restauranteNome+"' não foi encontrado.");
         }
+        
+        @SuppressWarnings("null")
         @Test
         @Order(7)
         void deveLancarExcecaoAoBuscarLocalizacaoRestauranteInexistente() {
@@ -299,6 +309,8 @@ class RestauranteServiceTest extends RestauranteDados {
                     .isInstanceOf(EntityNotFoundException.class)
                     .hasMessage("Restaurante com localização '"+restauranteLocalizacao+"' não foi encontrado.");
         }
+        
+        @SuppressWarnings("null")
         @Test
         @Order(8)
         void deveLancarExcecaoAoBuscarTipoCozinhaRestauranteInexistente() {
