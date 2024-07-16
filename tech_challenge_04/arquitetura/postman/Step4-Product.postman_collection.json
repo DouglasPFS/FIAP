@@ -1,0 +1,1060 @@
+{
+	"info": {
+		"_postman_id": "0e17b94c-84e4-41e7-a4b0-6806e1460e39",
+		"name": "Step4-Product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16170565"
+	},
+	"item": [
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "POST Token API Produtos",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "tokenName",
+									"value": "step4api-produtos",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "step4api/produtos",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "1bt55bj0gkdshsh6nf484r77llkiq2rtafch1gllchkocq11r54u",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "20n64ruqep56s41m7mg3stuvkv",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"step4",
+								"auth",
+								"us-east-1",
+								"amazoncognito",
+								"com"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST CSV",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3Byb2R1dG9zIiwiYXV0aF90aW1lIjoxNzE2MjE5MDA0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYyMjI2MDQsImlhdCI6MTcxNjIxOTAwNCwidmVyc2lvbiI6MiwianRpIjoiZWU0YjY1OTktNDBhOC00ZDY1LThjNGQtMjViOGU2OTA1ZTFjIiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.Ig5rgjxuo62dp6LW5tCM4DofqIgFo_OHKTUpcbAMoG59alZMC-StgiG8W6RciE2K_61Glecg1G76Mx_P8dwR704YSooaKYs_YkoE50n6PNJw_LWg3gueaUmAEGo2LdDFN3kQy3_d4vV93j5DAIDYquIVjh9kaDU0j4cX09-1EI9QWXBwgwXzaLMc1-D7wboRCi-ZdlsGG0Z1apGSXMrTHuWP87CRiDFkI-NZzAMfBs9JowEXnXyE0elrs675ypOWAy1CID8qRLDCitiadTQw7wcBhm9yarvOd2-prc5nk_KB8QZ35Cz5hfgK1x009MOWsBhp83Baycj1SQRrVouj0g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/C:/Users/Jeff/Downloads/produtos.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos/carga",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"carga"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Produtos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3Byb2R1dG9zIiwiYXV0aF90aW1lIjoxNzE2MTYyMTcxLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYxNjU3NzEsImlhdCI6MTcxNjE2MjE3MSwidmVyc2lvbiI6MiwianRpIjoiMDdjMmFiODItZDMwYS00MDBmLTlkODItMDFmMDBmNmM1NmE4IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.L8o80EK7RU1j917I4CD1mg1ZE00XXlYjFzYSb2iHgHWNP_fYe-F5Xlkz3Z-39_1sYgP1RTQaItpE44FsQCnTDJi9T1uFTHDoMOZ4ja8Ym-LZEliZzF5oHH-Y7nzw3vcGF3tLBvJzLhTOd6sMpbq0HP_zsUm__3yZgzHXncFDfn3ZgNOLHczbeJqr8i4Z1agZApBeTif4PJik-hfSy-qm0v7K3ZPk0-c3FZA1EpWIuGyrnyrJBzjVk7ztLPPr-6NXXK7Sc2tbD09qnkmXy0xmsxPrjYiVxHvMJFomt6iQJ_D3oPKo9Y9EeKEmmzucgCGdiY4PIMXxvzrgprQnk6emYw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Android 14\",\n    \"description\": \"Smartphone muito bom!\",\n    \"quantity\": 100,\n    \"price\": 50.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Produtos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3Byb2R1dG9zIiwiYXV0aF90aW1lIjoxNzE2MjA5MjY4LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYyMTI4NjgsImlhdCI6MTcxNjIwOTI2OCwidmVyc2lvbiI6MiwianRpIjoiYTkxYjRjOWEtMTk5ZC00NWI3LTk2MWQtMjMxMWFlODU3YzQ2IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.tBnFQOll9bH4cTfQOG90dnGxzIFRBznvOVn8o-h7ImRE5Wn4yVdF8TjQMafvNycGnGN60ek_uAxnXwvip-rKalT9LCTtBNEPRv5GJPFbJwVVYk_hJb70NyRuT1qVYBO8XCvn9wfXEXyfuamstKnv8C1jFYHTS-gvOKPoo81paqaH0ELsJg4mDov3Gfczu4J-JfL7NwqURVM-9ZFvPAnnu9rdBGkQkft1ao7poPhoCT4_mYt4oyfDNg5KahxTR_TDRe9eBwSpILF46Ig-_ATIgIEuhf0U-PoOY9weqFIBT6dzwGXOb33mzyNDEGGA8CZPxAe7x6y-8HLpYaVe7A0bGA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ProdutosById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3Byb2R1dG9zIiwiYXV0aF90aW1lIjoxNzE1OTc2NDgwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTU5ODAwODAsImlhdCI6MTcxNTk3NjQ4MCwidmVyc2lvbiI6MiwianRpIjoiYmQzY2FjY2QtZjgxZi00YWQ2LThmMjYtZjE5Y2M5MzEyN2I2IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.dHGqW6HO7eGabTpZ2I58uLcRmHRr2i0qjIdGd__wlR_ofiF1oQADGVaLxPrXMfvccrD8_XZba32Y4j8P_Dhzu8m9lMLJgmymNj5K8W5k-3hKxKiBWz_f6cUqvfNmPuqi6MOWv52FPl8yv8SM7xHAWArCFW1-b1bn2y9KREru9tgu4R4LrVgIfREElRTmxHGaqmY51m6WiaCYU2AmBCa8gxxqOEzz3bRE2C5-vXSwPSTLlOtVk06Xw-lUuOuBFNpA2BHkwUKnaJyO55ysXQSjyIMzb0x224YH8IA7rHEoU-YBCo0HbYsM3T1WoOLr4blB4fx5JQ02yr-IY-cDiQb2gg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos/8",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT UpdateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3Byb2R1dG9zIiwiYXV0aF90aW1lIjoxNzE1OTc2NDgwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTU5ODAwODAsImlhdCI6MTcxNTk3NjQ4MCwidmVyc2lvbiI6MiwianRpIjoiYmQzY2FjY2QtZjgxZi00YWQ2LThmMjYtZjE5Y2M5MzEyN2I2IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.dHGqW6HO7eGabTpZ2I58uLcRmHRr2i0qjIdGd__wlR_ofiF1oQADGVaLxPrXMfvccrD8_XZba32Y4j8P_Dhzu8m9lMLJgmymNj5K8W5k-3hKxKiBWz_f6cUqvfNmPuqi6MOWv52FPl8yv8SM7xHAWArCFW1-b1bn2y9KREru9tgu4R4LrVgIfREElRTmxHGaqmY51m6WiaCYU2AmBCa8gxxqOEzz3bRE2C5-vXSwPSTLlOtVk06Xw-lUuOuBFNpA2BHkwUKnaJyO55ysXQSjyIMzb0x224YH8IA7rHEoU-YBCo0HbYsM3T1WoOLr4blB4fx5JQ02yr-IY-cDiQb2gg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Android 14\",\n    \"description\": \"Smartphone muito bom!\",\n     \"quantity\": 100,\n    \"price\": 50.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos/8",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE DeleteProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3Byb2R1dG9zIiwiYXV0aF90aW1lIjoxNzE1OTc2NDgwLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTU5ODAwODAsImlhdCI6MTcxNTk3NjQ4MCwidmVyc2lvbiI6MiwianRpIjoiYmQzY2FjY2QtZjgxZi00YWQ2LThmMjYtZjE5Y2M5MzEyN2I2IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.dHGqW6HO7eGabTpZ2I58uLcRmHRr2i0qjIdGd__wlR_ofiF1oQADGVaLxPrXMfvccrD8_XZba32Y4j8P_Dhzu8m9lMLJgmymNj5K8W5k-3hKxKiBWz_f6cUqvfNmPuqi6MOWv52FPl8yv8SM7xHAWArCFW1-b1bn2y9KREru9tgu4R4LrVgIfREElRTmxHGaqmY51m6WiaCYU2AmBCa8gxxqOEzz3bRE2C5-vXSwPSTLlOtVk06Xw-lUuOuBFNpA2BHkwUKnaJyO55ysXQSjyIMzb0x224YH8IA7rHEoU-YBCo0HbYsM3T1WoOLr4blB4fx5JQ02yr-IY-cDiQb2gg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos/9",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Atualizar Estoque",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2NsaWVudGVzIiwiYXV0aF90aW1lIjoxNzE2MTcwMzQ5LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYxNzM5NDksImlhdCI6MTcxNjE3MDM0OSwidmVyc2lvbiI6MiwianRpIjoiODY4MTdkZjgtNGE3NS00NDIyLWE0MGEtYWVmYmNmZDI2YWI2IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.n73t5NW0Yw8cVpzZyGRB8Hfet4-Gzq_Gg7gBS2zg3HMOJzS_KFt7Wz0fKOiVGPLan26JkK4_-9ifLmbX1HPQb50Ow9ZU5kFpXQ1lnDPS0Wz5OppWbxZ5nwadWHlfzC3giezMq0cAUbUxd9mMdnrUfQCeXEVmfGi3wCmsc7hGzueGNB88EcpzsKIr0U5PEIPP-P7HsobuULckSKxmgVYCq6HJOFlLrB_Kja3WihvjMDr4OxlcvJztJK4_XT1KFf4iEjbTz5FpqtU5akM4TeJgVGat4ku54VSceEWrHcD9iklolLyRNk3wK1mEkX5xXVVkUEtbNdzzrwJKdUSwWfzSSw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 2,\r\n        \"name\": \"Android 14\",\r\n        \"description\": \"Smartphone muito bom!\",\r\n        \"quantity\": 200,\r\n        \"price\": 50.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/produtos/2/atualizar-estoque",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"2",
+								"atualizar-estoque"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "POST Token API Clientes",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "step4api/clientes",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "step4api-clientes",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "1bt55bj0gkdshsh6nf484r77llkiq2rtafch1gllchkocq11r54u",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "20n64ruqep56s41m7mg3stuvkv",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"step4",
+								"auth",
+								"us-east-1",
+								"amazoncognito",
+								"com"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Clientes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2NsaWVudGVzIiwiYXV0aF90aW1lIjoxNzE2MTcwMzQ5LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYxNzM5NDksImlhdCI6MTcxNjE3MDM0OSwidmVyc2lvbiI6MiwianRpIjoiODY4MTdkZjgtNGE3NS00NDIyLWE0MGEtYWVmYmNmZDI2YWI2IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.n73t5NW0Yw8cVpzZyGRB8Hfet4-Gzq_Gg7gBS2zg3HMOJzS_KFt7Wz0fKOiVGPLan26JkK4_-9ifLmbX1HPQb50Ow9ZU5kFpXQ1lnDPS0Wz5OppWbxZ5nwadWHlfzC3giezMq0cAUbUxd9mMdnrUfQCeXEVmfGi3wCmsc7hGzueGNB88EcpzsKIr0U5PEIPP-P7HsobuULckSKxmgVYCq6HJOFlLrB_Kja3WihvjMDr4OxlcvJztJK4_XT1KFf4iEjbTz5FpqtU5akM4TeJgVGat4ku54VSceEWrHcD9iklolLyRNk3wK1mEkX5xXVVkUEtbNdzzrwJKdUSwWfzSSw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Usuário XYZ\",\n  \"email\": \"jeffersantos@gmail.com\",\n  \"telefone\": \"(11) 97XXX-YYYY\",\n  \"endereco\": {\n    \"logradouro\": \"Rua XYZ\",\n    \"bairro\": \"XYZ\",\n    \"estado\": \"SP\",\n    \"cidade\": \"SP\",\n    \"cep\": \"00000-0000\"\n  },\n  \"dataNascimento\": \"08/06/1987\",\n  \"cpf\": \"348.XXX.XXX-YY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/clientes",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Clientes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2NsaWVudGVzIiwiYXV0aF90aW1lIjoxNzE1OTk3NDUyLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYwMDEwNTIsImlhdCI6MTcxNTk5NzQ1MiwidmVyc2lvbiI6MiwianRpIjoiMTgzNTMyMzQtOWU3ZC00OGMwLTljOGYtNDQxYjQwMjc4ZTA0IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.NLAR7zAxoFa28yT5QfeOOnYoYXO0-DtmhdNpVP4QcfbzEz7RueGe88M8Qb7skf_WwHTG7-k0m4C5K5yOMnlc7QOGxNZ2q17CRDDuoKjgV0IlcGXfrs2oSmTgY8b0R_h8gIzni8IbmJJyZfja4vlpTqdved7Z0z0wMYJ5GvKsig0GqGWQfoPoQwwz0ybQlvY9eRhaXQNJphgM36VqaH0pXfukBkQIgD9ZlXVwzYjGSziW__0HINPv3tEbiCV0nIHpqUV3piXsu8m5TCtVdfLYu4hhvW4HoNdWehvlZgl5PSI309DkDw41DhDJcHx2ZEDtWqgDkg_x4t0BvYe482qiWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/clientes",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ClientesById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2NsaWVudGVzIiwiYXV0aF90aW1lIjoxNzE1OTk3NDUyLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYwMDEwNTIsImlhdCI6MTcxNTk5NzQ1MiwidmVyc2lvbiI6MiwianRpIjoiMTgzNTMyMzQtOWU3ZC00OGMwLTljOGYtNDQxYjQwMjc4ZTA0IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.NLAR7zAxoFa28yT5QfeOOnYoYXO0-DtmhdNpVP4QcfbzEz7RueGe88M8Qb7skf_WwHTG7-k0m4C5K5yOMnlc7QOGxNZ2q17CRDDuoKjgV0IlcGXfrs2oSmTgY8b0R_h8gIzni8IbmJJyZfja4vlpTqdved7Z0z0wMYJ5GvKsig0GqGWQfoPoQwwz0ybQlvY9eRhaXQNJphgM36VqaH0pXfukBkQIgD9ZlXVwzYjGSziW__0HINPv3tEbiCV0nIHpqUV3piXsu8m5TCtVdfLYu4hhvW4HoNdWehvlZgl5PSI309DkDw41DhDJcHx2ZEDtWqgDkg_x4t0BvYe482qiWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/clientes/3",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT UpdateCliente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2NsaWVudGVzIiwiYXV0aF90aW1lIjoxNzE1OTk3NDUyLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYwMDEwNTIsImlhdCI6MTcxNTk5NzQ1MiwidmVyc2lvbiI6MiwianRpIjoiMTgzNTMyMzQtOWU3ZC00OGMwLTljOGYtNDQxYjQwMjc4ZTA0IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.NLAR7zAxoFa28yT5QfeOOnYoYXO0-DtmhdNpVP4QcfbzEz7RueGe88M8Qb7skf_WwHTG7-k0m4C5K5yOMnlc7QOGxNZ2q17CRDDuoKjgV0IlcGXfrs2oSmTgY8b0R_h8gIzni8IbmJJyZfja4vlpTqdved7Z0z0wMYJ5GvKsig0GqGWQfoPoQwwz0ybQlvY9eRhaXQNJphgM36VqaH0pXfukBkQIgD9ZlXVwzYjGSziW__0HINPv3tEbiCV0nIHpqUV3piXsu8m5TCtVdfLYu4hhvW4HoNdWehvlZgl5PSI309DkDw41DhDJcHx2ZEDtWqgDkg_x4t0BvYe482qiWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"id\": 4,\n  \"nome\": \"Ricardo Rafael Lara\",\n  \"email\": \"ricardolara.ti@gmail.com\",\n  \"telefone\": \"(15) 99611-3683\",\n  \"endereco\": {\n    \"logradouro\": \"Rua Maria Rodrigues de  Almeida, 340\",\n    \"bairro\": \"Reserva dos Ypes\",\n    \"estado\": \"SP\",\n    \"cidade\": \"Tatuí\",\n    \"cep\": \"18276-300\"\n  },\n  \"dataNascimento\": \"11/07/1992\",\n  \"cpf\": \"412.138.278-17\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/clientes/4",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Cliente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2NsaWVudGVzIiwiYXV0aF90aW1lIjoxNzE1OTk3NDUyLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYwMDEwNTIsImlhdCI6MTcxNTk5NzQ1MiwidmVyc2lvbiI6MiwianRpIjoiMTgzNTMyMzQtOWU3ZC00OGMwLTljOGYtNDQxYjQwMjc4ZTA0IiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.NLAR7zAxoFa28yT5QfeOOnYoYXO0-DtmhdNpVP4QcfbzEz7RueGe88M8Qb7skf_WwHTG7-k0m4C5K5yOMnlc7QOGxNZ2q17CRDDuoKjgV0IlcGXfrs2oSmTgY8b0R_h8gIzni8IbmJJyZfja4vlpTqdved7Z0z0wMYJ5GvKsig0GqGWQfoPoQwwz0ybQlvY9eRhaXQNJphgM36VqaH0pXfukBkQIgD9ZlXVwzYjGSziW__0HINPv3tEbiCV0nIHpqUV3piXsu8m5TCtVdfLYu4hhvW4HoNdWehvlZgl5PSI309DkDw41DhDJcHx2ZEDtWqgDkg_x4t0BvYe482qiWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/clientes/4",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "POST Token API Pedidos",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "step4api/pedidos",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "step4api-pedidos",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "1bt55bj0gkdshsh6nf484r77llkiq2rtafch1gllchkocq11r54u",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "20n64ruqep56s41m7mg3stuvkv",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"step4",
+								"auth",
+								"us-east-1",
+								"amazoncognito",
+								"com"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Pedidos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCliente\": 1,\n  \"formaPagamento\": \"CARTAO_DEBITO\",\n  \"validadeFormaPagamentoCartao\": \"02/2028\",\n  \"pedidoProdutos\": [\n    {\n      \"idProduto\": 2,\n      \"quantidade\": 1\n    },\n    {\n      \"idProduto\": 3,\n      \"quantidade\": 1\n    },\n    {\n      \"idProduto\": 4,\n      \"quantidade\": 3\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/pedidos",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Pedidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3BlZGlkb3MiLCJhdXRoX3RpbWUiOjE3MTYwMDA0ODEsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xXzR2RUIwZm94VCIsImV4cCI6MTcxNjAwNDA4MSwiaWF0IjoxNzE2MDAwNDgxLCJ2ZXJzaW9uIjoyLCJqdGkiOiIwYzBkNTQ1Yi02NWMwLTQ1ZTItOGNhYS03MDBmY2E5ZjhlNmMiLCJjbGllbnRfaWQiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiJ9.xHHj-ifnwphfLmaBBI4z7yndJ9x4HPWADM8d7Sisv8CtRCqTp_3Z1SDqcYCAmy6q7WA_gpWAn5Os7IbGrubiPhhDgOo0jD69HB4j-ksMGva-Vd4RefeRV5r2wG9nyfQUr4OdQC4hqaDIG1LHJoFHtP_Z0mgK6qub90ONgjDjdUUpkOPq9Q8zHJahH_EepuxinRITgSoi4uFkqMgUuV3G1XWZlKerUow7t8yM0eeb2QRuYI7NMNLIxKpNfqImChNFVxdudKEbpIpocSWear6teTAVExnRSNdHtI8Z1to7gHrGynCKre8Ff9LiHR9lQLHcYo3Hc8RFBsGFOhOBXwqL_Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/pedidos",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PedidosById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL3BlZGlkb3MiLCJhdXRoX3RpbWUiOjE3MTYwMDA0ODEsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xXzR2RUIwZm94VCIsImV4cCI6MTcxNjAwNDA4MSwiaWF0IjoxNzE2MDAwNDgxLCJ2ZXJzaW9uIjoyLCJqdGkiOiIwYzBkNTQ1Yi02NWMwLTQ1ZTItOGNhYS03MDBmY2E5ZjhlNmMiLCJjbGllbnRfaWQiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiJ9.xHHj-ifnwphfLmaBBI4z7yndJ9x4HPWADM8d7Sisv8CtRCqTp_3Z1SDqcYCAmy6q7WA_gpWAn5Os7IbGrubiPhhDgOo0jD69HB4j-ksMGva-Vd4RefeRV5r2wG9nyfQUr4OdQC4hqaDIG1LHJoFHtP_Z0mgK6qub90ONgjDjdUUpkOPq9Q8zHJahH_EepuxinRITgSoi4uFkqMgUuV3G1XWZlKerUow7t8yM0eeb2QRuYI7NMNLIxKpNfqImChNFVxdudKEbpIpocSWear6teTAVExnRSNdHtI8Z1to7gHrGynCKre8Ff9LiHR9lQLHcYo3Hc8RFBsGFOhOBXwqL_Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/pedidos/3",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"pedidos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Entregas",
+			"item": [
+				{
+					"name": "POST Token API Entregas",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "scope",
+									"value": "step4api/entregas",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "step4api-pedidos",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "1bt55bj0gkdshsh6nf484r77llkiq2rtafch1gllchkocq11r54u",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "20n64ruqep56s41m7mg3stuvkv",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://step4.auth.us-east-1.amazoncognito.com/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"step4",
+								"auth",
+								"us-east-1",
+								"amazoncognito",
+								"com"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Entregas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2VudHJlZ2FzIiwiYXV0aF90aW1lIjoxNzE2MjUxNDE2LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYyNTUwMTYsImlhdCI6MTcxNjI1MTQxNiwidmVyc2lvbiI6MiwianRpIjoiYzE0YjM4MzctNzg1NS00MjgxLTlkMWEtNDQ2MjU4NDlkNGYxIiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.0-xcc6JRuKYTZ_jWjwCPmiLKXinzKk9Qu-ERmXepvg-I01we9z1RIAVQzcxQ9irlQJ-qYUPRQg9RDe4KTEpxwsqTZAFdUzneCseHKsccHr51wBhCnvMbxeSu98zd5m_hcS0AejCBBAWvutTVKLSO-TMDL-hDUcHaEdrj15Wei0wEXIU1S-lVz_Jt4400IpsB9dQjP0uT5FJPcPU1Z47zrUyxHSaZIbOo3exQxliwBOzVYy-02ZZWvqWFOK7oYU_RInNsnarHopdx8t3SRoN-eizah_BkHadDDjQxIcnEXK5X3ZR1Hy5DKTdrt1wUq90wx_MGm9ODxzgZuqAHMqwkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idCliente\": 1,\n  \"formaPagamento\": \"CARTAO_DEBITO\",\n  \"validadeFormaPagamentoCartao\": \"02/2028\",\n  \"pedidoProdutos\": [\n    {\n      \"idProduto\": 1,\n      \"quantidade\": 1\n    },\n    {\n      \"idProduto\": 2,\n      \"quantidade\": 1\n    },\n    {\n      \"idProduto\": 3,\n      \"quantidade\": 3\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/entregas/criar",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"entregas",
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Entregas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJraWQiOiJvclFyU1B3QlJhZlB4XC9ZZlRwVXk5dlZZUlRrSEdESnc2cGFRNUdxVDZaRT0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIyMG42NHJ1cWVwNTZzNDFtN21nM3N0dXZrdiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoic3RlcDRhcGlcL2VudHJlZ2FzIiwiYXV0aF90aW1lIjoxNzE2MjUxNDE2LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV80dkVCMGZveFQiLCJleHAiOjE3MTYyNTUwMTYsImlhdCI6MTcxNjI1MTQxNiwidmVyc2lvbiI6MiwianRpIjoiYzE0YjM4MzctNzg1NS00MjgxLTlkMWEtNDQ2MjU4NDlkNGYxIiwiY2xpZW50X2lkIjoiMjBuNjRydXFlcDU2czQxbTdtZzNzdHV2a3YifQ.0-xcc6JRuKYTZ_jWjwCPmiLKXinzKk9Qu-ERmXepvg-I01we9z1RIAVQzcxQ9irlQJ-qYUPRQg9RDe4KTEpxwsqTZAFdUzneCseHKsccHr51wBhCnvMbxeSu98zd5m_hcS0AejCBBAWvutTVKLSO-TMDL-hDUcHaEdrj15Wei0wEXIU1S-lVz_Jt4400IpsB9dQjP0uT5FJPcPU1Z47zrUyxHSaZIbOo3exQxliwBOzVYy-02ZZWvqWFOK7oYU_RInNsnarHopdx8t3SRoN-eizah_BkHadDDjQxIcnEXK5X3ZR1Hy5DKTdrt1wUq90wx_MGm9ODxzgZuqAHMqwkJg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/entregas/obter/tudo",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"entregas",
+								"obter",
+								"tudo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET EntregasById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/entregas/obter/porId/4",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"entregas",
+								"obter",
+								"porId",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT UpdateEntrega",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"id\": 4,\n  \"nome\": \"Ricardo Rafael Lara\",\n  \"email\": \"ricardolara.ti@gmail.com\",\n  \"telefone\": \"(15) 99611-3683\",\n  \"endereco\": {\n    \"logradouro\": \"Rua Maria Rodrigues de  Almeida, 340\",\n    \"bairro\": \"Reserva dos Ypes\",\n    \"estado\": \"SP\",\n    \"cidade\": \"Tatuí\",\n    \"cep\": \"18276-300\"\n  },\n  \"dataNascimento\": \"11/07/1992\",\n  \"cpf\": \"412.138.278-17\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/entregas/editar/4",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"entregas",
+								"editar",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Entrega",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://ej9cwds712.execute-api.us-east-1.amazonaws.com/api/entregas/deletar/4",
+							"protocol": "https",
+							"host": [
+								"ej9cwds712",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"api",
+								"entregas",
+								"deletar",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

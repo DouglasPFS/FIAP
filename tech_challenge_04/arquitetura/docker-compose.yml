@@ -1,0 +1,130 @@
+services:
+   api-gateway:
+     image: 'api-gateway:latest'
+     build:
+       context: ../api-gateway
+     container_name: api-gateway
+     ports:
+       - 8080:8080
+     depends_on:
+       - produtos-app
+       - clientes-app
+       - pedidos-app
+       - entregas-app
+
+   produtos-app:
+      image: 'produtos-app:latest'
+      build:
+        context: ../produtos-app
+      container_name: produtos-app
+      ports:
+        - 8081:8081
+      depends_on:
+        db:
+          condition: service_healthy
+      environment:
+        - DATASOURCE_URL=jdbc:postgresql://db:5432/db_produtos
+        - DATASOURCE_USERNAME=postgres
+        - DATASOURCE_PASSWORD=teste123
+        - AWS_DEFAULT_REGION=us-east-1
+        - AWS_ACCESS_KEY=AKS
+        - AWS_SECRET_KEY=AKS
+        - AWS_ENDPOINT=http://localhost:4566
+
+   clientes-app:
+     image: 'clientes-app:latest'
+     build:
+       context: ../clientes-app
+     container_name: clientes-app
+     ports:
+       - 8082:8082
+     depends_on:
+       db:
+         condition: service_healthy
+     environment:
+       - DATASOURCE_URL=jdbc:postgresql://db:5432/db_clientes
+       - DATASOURCE_USERNAME=postgres
+       - DATASOURCE_PASSWORD=teste123
+       - AWS_ENDPOINT=http://localhost:4566
+       - AWS_SQS_ENDPOINT_ENVIA_EMAILS=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/envia-emails
+       - AWS_CLIENT_ID=AKS
+       - AWS_CLIENT_SECRET=AKS
+       - AWS_REGION=us-east-1
+
+   pedidos-app:
+     image: 'pedidos-app:latest'
+     build:
+       context: ../pedidos-app
+     container_name: pedidos-app
+     ports:
+        - 8083:8083
+     depends_on:
+        db:
+          condition: service_healthy
+     environment:
+        - DATASOURCE_URL=jdbc:postgresql://db:5432/db_pedidos
+        - DATASOURCE_USERNAME=postgres
+        - DATASOURCE_PASSWORD=teste123
+        - AWS_ENDPOINT=http://localhost:4566
+        - AWS_SQS_ENDPOINT_ENVIA_EMAILS=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/envia-emails
+        - AWS_CLIENT_ID=AKS
+        - AWS_SECRET_ID=AKS
+        - API_CLIENTE_ENDPOINT=http://localhost:8082/api/clientes
+        - AWS_SQS_ENDPOINT_PROCESSA_PEDIDOS=http://sqs.us-east-1.localhost.localstack.cloud:4566/000000000000/processa-pedidos
+        - API_PRODUTO_ENDPOINT=http://localhost:8081/api/produtos
+        - AWS_REGION=us-east-1
+
+   entregas-app:
+     image: 'entregas-app:latest'
+     build:
+       context: ../entregas-app
+     container_name: entregas-app
+     ports:
+       - 8084:8084
+     depends_on:
+       db:
+         condition: service_healthy
+     environment:
+       - DATASOURCE_URL=jdbc:postgresql://db:5432/db_entregas
+       - DATASOURCE_USERNAME=postgres
+       - DATASOURCE_PASSWORD=teste123
+       - AWS_REGION=us-east-1
+       - AWS_ACCESS_KEY=AKS
+       - AWS_SECRET_KEY=AKS
+       - AWS_ENDPOINT=http://localhost:4566
+
+   db:
+     image: postgres:latest
+     container_name: postgres_db
+     restart: always
+     ports:
+       - 5432:5432
+     environment:
+       POSTGRES_USERNAME: postgres
+       POSTGRES_PASSWORD: teste123
+       POSTGRES_MULTIPLE_DATABASES: db_produtos, db_clientes, db_pedidos, db_entregas
+     volumes:
+       - ./scripts/multiple-databases.sh:/docker-entrypoint-initdb.d/multiple-databases.sh
+       - ../postgres:/var/lib/postgresql/data
+     healthcheck:
+       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+       interval: 5s
+       timeout: 5s
+       retries: 5
+
+   localstack:
+     image: localstack/localstack:latest
+     container_name: localstack
+     ports:
+       - '4566:4566' # LocalStack endpoint
+       - '4510-4559:4510-4559' # external services port range
+     environment:
+       - DOCKER_HOST=unix:///var/run/docker.sock
+       - DEFAULT_REGION=us-east-1
+       - AWS_DEFAULT_REGION=us-east-1
+       - AWS_ACCESS_KEY_ID=AKS
+       - AWS_SECRET_ACCESS_KEY=AKS
+     volumes:
+       - ./script-localstack/localstack-script.sh:/etc/localstack/init/ready.d/script.sh
+       - '/var/run/docker.sock:/var/run/docker.sock'
+

@@ -1,0 +1,13 @@
+
+
+java:S1874"9Remove this use of "authorizeRequests"; it is deprecated.(ïğ¢Óûÿÿÿÿ8õÿë¥‡2J$8be3bd3b-870e-435c-bea4-014868683d4a
+Š
+java:S5738"HRemove this call to a deprecated method, it has been marked for removal.(ßÒ£E8öÿë¥‡2J$88504aa8-ff8f-42d2-a66f-da2f21c8413a
+}
+java:S1611 "5Remove the parentheses around the "session" parameter(¿æ¶¦úÿÿÿÿ8öÿë¥‡2J$53184e47-0c8b-4030-bdd2-4dd76efc2332
+‹
+java:S5738""HRemove this call to a deprecated method, it has been marked for removal.(ç—ôâ8öÿë¥‡2J$d2787230-274d-4802-b6df-d417a7cb715c
+
+java:S5738#"HRemove this call to a deprecated method, it has been marked for removal.(ÖÇ‡‡ûÿÿÿÿ8öÿë¥‡2J$9c2ff19d-99e6-4c74-a758-a21dbb8c0c67
+Œ
+java:S1128"IRemove this unused import 'io.swagger.v3.oas.models.PathItem.HttpMethod'.(šØ½8ûÿë¥‡2J$3c367437-92f7-45dc-8e48-84f6200ef885
